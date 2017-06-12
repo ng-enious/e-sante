@@ -1,0 +1,82 @@
+<div class="listpgWraper">
+  <div class="container">
+
+    <!-- Page Title start -->
+    <div class="pageSearch">
+      <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-9">
+          <div class="searchform">
+            <div class="row">
+              <div class="col-md-4 col-sm-3">
+                <input type="text" class="form-control" #search  (keyup)="0"  placeholder="Comment puis-je vous aider aujourd'hui ?" style="    margin-left: -60%;    width: 877px;" />
+              </div>
+
+              <div class="col-md-1 col-sm-2">
+                <button class="btn" style="margin-left: 594%;"><i class="fa fa-search" aria-hidden="true"></i></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page Title end -->
+
+    <!-- Search Result and sidebar start -->
+    <div class="row">
+      <div class="col-md-3 col-sm-6">
+        <!-- Side Bar start -->
+
+        <!-- Side Bar end -->
+      </div>
+      <div class="col-md-3 col-sm-6 pull-right">
+        <!-- Social Icons -->
+
+
+        <!-- Sponsord By -->
+
+      </div>
+      <div class="col-md-6 col-sm-12">
+        <!-- Search List -->
+        <ul class="searchList">
+          <!-- job start -->
+          <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+          <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of destinations | searchFilter: search.value">
+            <div class="row">
+              <div class="col-md-8 col-sm-8">
+                <div class="jobimg"><img src="https://lh3.googleusercontent.com/8VF8Oom0BIT89x24dFfhjexnQ2EQy_vNx5Qxob9rWxzPDyuc55IzB5POJ1Vcm2Xve4o2=w300" alt="Job Name" /></div>
+                <div class="jobinfo">
+                  <h3><a>{{docc.titre|titlecase}}</a></h3>
+                  <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_name(docc.uid) | async)?.name }}</a></div>
+                  <div class="companyName"><a>{{docc.tags}}</a></div>
+                </div>
+                <div class="clearfix"></div>
+              </div>
+              <div class="col-md-4 col-sm-4">
+                <div style="margin-top: 14px;" class="listbtn"><a target="_blank" href="{{docc.doc}}">ouvrir</a></div>
+              </div>
+            </div>
+            <p style="margin-left: 9px;">{{docc.desc}}</p>
+          </li>
+          <!-- job end -->
+
+          <!-- job start -->
+
+        </ul>
+
+
+        <!-- Pagination end -->
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!--Footer end-->
+
+<!--Copyright-->
+<div class="copyright">
+  <div class="container">
+    <div class="bttxt">Copyright &copy; 2017</div>
+  </div>
+</div>

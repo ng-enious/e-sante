@@ -1,0 +1,64 @@
+<div style="background-image: url('https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/computer-1149148_960_2.jpg?alt=media&token=b680c0dc-e663-46f1-ac24-5a93e00d1309');
+    height: 665.5px;
+    margin-top: -4%; background-repeat: round;">
+
+<div class="modal-dialog" style="
+    margin-top: 0px;
+    height: 545px;">
+  <img src="./src/app/biglogo.png" style="width: 23%;
+    margin-left: 34%;
+    margin-top: 13%;
+    margin-bottom: -10%;">
+  <br>
+  <br>
+  <br><br><br>
+  <div class="modal-content" style="width: 68%;
+    margin-left: 12%;">
+    <div class="modal-header">
+      <h4 class="modal-title" id="signinLabel" style="text-align: center;font-size: large;">S'identifier</h4>
+    </div>
+    <div class="modal-body">
+      <form role="form"  (submit)="loginWithEmail($event, email.value, password.value)">
+        <div class="form-group">
+          <div class="btn-group-justified">
+            <a (click)="loginFb()"  class="btn btn-lg btn-facebook"><span class="fa fa-facebook pull-left"></span>S'identifier  avec Facebook</a>
+          </div>
+        </div>
+        <div class="signOr">OU</div>
+        <div class="form-group">
+          <input #email  type="text" placeholder="Adresse mail" class="form-control" autocomplete="on">
+        </div>
+        <div class="form-group">
+          <input  #password type="password" placeholder="Mot de passe" class="form-control">
+        </div>
+        <div class="form-group">
+          <div class="row">
+            <div class="col-xs-6">
+              <p class="help-block"><a [routerLink]="['/mail']" class="text-green">Mot de passe oublié?</a></p>
+            </div>
+            <div class="col-xs-6 align-right">
+
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="btn-group-justified">
+            <button class="btn btn-lg btn-green" type="submit" style="width: 100%">S'identifier</button>
+          </div>
+        </div>
+        <p class="help-block">Vous n'avez pas de compte? <a [routerLink]="['/register']"  class="modal-su text-green">S'inscrire</a></p>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="error" class="alert alert-danger" role="alert" style="width: 68%;
+    margin-left: 74px;
+    margin-top: 8px;
+    background-color: #bb2e2e;
+    color: white;">
+    <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    {{error}}
+  </div>
+
+</div>
+</div>

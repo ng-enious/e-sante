@@ -1,0 +1,378 @@
+<div class="home">
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <div id="page-contents" style="padding: 30px 0 29.1%;">
+    <div class="container-fluid">
+      <div class="row">
+
+        <div class="alert-container"  [style.left]="getLeft()" [style.right]="getRight()">
+          <nac-alert-center animation="'fancy'"></nac-alert-center>
+        </div>
+        <!-- Newsfeed Common Side Bar Left
+        ================================================= -->
+        <div class="fixed col-md-3 ">
+          <div id="chat-block2">
+            <div class="profile-card">
+              <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="user" class="profile-photo" />
+              <h5><a [routerLink]="['/profile']" class="text-white">{{ (get_name(currentuser) | async)?.name | titlecase }}</a></h5>
+              <a  class="text-white"><i class="ion ion-android-person-add"></i> {{nb_amie[0]}} Amis</a>
+            </div><!--profile card ends-->
+            <div class="left-content">
+              <ul class="nav-news-feed">
+                <li><i class="icon ion-android-contacts"></i><div><a [routerLink]="['/forum']">Forum</a></div></li>
+                <li><i class="icon ion-ios-people"></i><div><a [routerLink]="['/amie']">Amis <span *ngIf="nb_invit[0]>0" class="badge">{{nb_invit[0]}}</span></a></div></li>
+                <!--<li><i class="icon ion-android-people"></i><div><a href="newsfeed-friends.html">Groupes</a></div></li>-->
+                <li><i class="icon ion-android-calendar"></i><div><a href="newsfeed-messages.html">Évènement</a></div></li>
+                <li><i class="icon ion-images"></i><div><a [routerLink]="['/doc']">Document</a></div></li>
+                <li><i class="fa fa-hospital-o" ></i><div><a [routerLink]="['/entreprise']">Entreprise</a></div></li>
+              </ul><!--news-feed links ends-->
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6" style="        left: 24.7%;">
+
+          <!-- Post Create Box
+          ================================================= -->
+          <div class="create-post">
+            <div class="pub-content">
+              <div class="row">
+                <div class="col-md-12 col-sm-7">
+                  <div class="form-group">
+                    <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="profile-photo-md" />
+                    <textarea #datas autosize name="texts" id="exampleTextarea" cols="70" rows="1" class="form-control"  [(ngModel)]="msgVal" style="overflow:auto;resize:none" placeholder=" Exprimer vous ..." ></textarea>
+
+                  </div>
+                  <div class="tools">
+                    <ul class="publishing-tools list-inline">
+                      <li><a [routerLink]="['/article']" ><i class="ion-compose"></i></a></li>
+                      <li><a (click)="file_click('photo')"><i class="ion-images" style="cursor: pointer;"></i></a></li>
+                      <li><a (click)="file_click('video')"><i class="ion-ios-videocam" style="cursor: pointer;"></i></a></li>
+                      <input  #phot id="photo" type="file" class="ion-ios-videocam" style="display: none" (change)="handleFileTarget($event)">
+                      <input  #vid id="video" type="file" class="ion-ios-videocam" style="display: none"  (change)="handleFileTarget($event)">
+                    </ul>
+
+                    <button class="btn btn-primary pull-right" (click)="post_upload(msgVal,vid.value,phot.value)">Publish</button>
+                    <br>{{getfilename(phot)}}<br>{{getfilename(vid)}}
+
+                  </div>
+                </div>
+                <br>
+                <div class="col-md-12 col-sm-5">
+
+                  <div class="w3-light-grey" *ngIf="bufferValuee[0]!=0" style="margin-bottom: 15px;">
+                    <div id="kkk" class="w3-container w3-blue w3-center" [style.width]="aa">{{loadd[0]}}%</div>
+                  </div>
+
+
+
+                </div>
+              </div>
+            </div>
+          </div><!-- Post Create Box End-->
+
+          <!-- Post Content
+          ================================================= -->
+          <div  class="search-results"
+               infinite-scroll
+               [infiniteScrollDistance]="1"
+               [infiniteScrollThrottle]="300"
+               (scrolled)="onScroll()">
+            <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+            <div >
+          <div *ngFor="let pos of post | async" class="post-content" >
+            <img src="{{ (get_name(pos.uid) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="user" class="profile-photo-md pull-left" style="margin-left: 24px;
+    margin-top: 8px;
+    margin-right: -12px"/>
+            <div class="post-detail" *ngIf="pos.type!=4" >
+              <div class="row">
+                <div class="col-md-6"> <div class="user-info" >
+
+                  <h5> &nbsp;&nbsp;&nbsp;<a *ngIf="pos.uid!=currentuser" [routerLink]="['/pvisitor',pos.uid]">{{ (get_name(pos.uid) | async)?.name | titlecase }}</a><a *ngIf="pos.uid==currentuser" [routerLink]="['/profile']">{{ (get_name(pos.uid) | async)?.name | titlecase }}</a></h5>
+                  <p class="text-muted" style="margin-left: 8px;">Publier le {{ pos.date*-1 | date:"dd/MM/yy hh:mm a" }}</p>
+
+                </div>
+                </div>
+                <div *ngIf="pos.uid==currentuser" class="col-md-6" style="right: -88%;top: -3pc;"> <a  class="dele" (click)="delete_post(pos.$key,pos.refdata,pos.type,pos.partage,pos.tarticle)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a></div>
+              </div>
+
+
+              <div class="line-divider"></div>
+              <div class="post-text">
+                <p>{{pos.content}}</p>
+              </div>
+              <div *ngIf="pos.content!=''" class="line-divider"></div>
+
+            </div>
+            <div class="post-detail" *ngIf="pos.type==4" >
+              <div class="row">
+                <div class="col-md-6"> <div class="user-info" >
+
+                  <h5> &nbsp;&nbsp;&nbsp;<a *ngIf="pos.uid!=currentuser" [routerLink]="['/pvisitor',pos.uid]">{{ (get_name(pos.uid) | async)?.name | titlecase }}</a><a *ngIf="pos.uid==currentuser" [routerLink]="['/profile']">{{ (get_name(pos.uid) | async)?.name | titlecase }}</a> &nbsp;&nbsp;&nbsp; <span style="background-color: #b1245d;
+    color: white;
+    font-family: cursive;
+    font-size: 13px;">&nbsp;Article&nbsp;</span></h5>
+                  <p class="text-muted" style="margin-left: 8px;">Publier le {{ pos.date*-1 | date:"dd/MM/yy hh:mm a" }}</p>
+
+
+                </div>
+                </div>
+                <div *ngIf="pos.uid==currentuser" class="col-md-6" style="right: -88%;top: -3pc;"> <a class="dele" (click)="delete_post(pos.$key,pos.refdata,pos.type,pos.partage)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a></div>
+              </div>
+
+
+              <div class="line-divider"></div>
+              <div style="cursor: pointer" data-toggle="modal" [attr.data-target]="'#'+pos.$key+'AR'">
+              <div style="margin-left: 5px;">
+               {{pos.title}}
+              </div>
+                <p style="color: blue;">Afficher la suite..</p>
+              <img *ngIf="pos.media!=null" [src]="pos.media"   style=" margin-left: 10%;width: 500px;" class="center-align"/>
+              </div>
+
+              <!--modal article read-->
+              <div class="modal fade in" id="{{pos.$key}}AR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content" style="height: 50%;
+    width: 162%;
+    /* left: -27%; */
+    right: 29%;">
+
+                    <div class="modal-body" >
+                      <img  [src]="pos.media"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/article.jpg?alt=media&token=2489a40c-f036-492b-974f-0608d3dc73ec" style="     margin-left: -2%;
+    width: 974px;
+    height: 330px;
+    margin-top: -15px;
+    margin-bottom: -20px;" class="center-align"/>
+                      <hr>
+                      <p style="text-align:center; font-size: xx-large;"><b>{{pos.title}}</b></p>
+                      <div [innerHTML]="pos.content" style="font: initial;"></div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" data-dismiss="modal" >Close</button>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+            <video *ngIf="pos.type==3" class="post-video" controls> <source src="{{pos.media}}" type="video/mp4"> </video>
+            <img *ngIf="pos.type==2" [src]="pos.media"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/erreur.PNG?alt=media&token=d62960c5-0a32-4a6a-97ea-e529a07741da" style=" margin-left: 10%;width: 500px;" class="center-align"/>
+
+            <div class="row">
+              <div class="col-xs-6 col-md-2" style="margin-top: 13px; font-size: 15px;margin-left: 10px; cursor: pointer"> <i
+                class="fa fa-thumbs-up"
+                [class.highlighted]="(like_check(pos.$key) | async)[currentuser]"
+                (click)="likes(pos.$key,currentuser)">&nbsp;J'aime &nbsp;&nbsp;
+              </i>  <a  style="font-size: 12.5px; cursor: pointer" data-toggle="modal" [attr.data-target]="'#'+pos.$key">{{(get_count_post(pos.$key) | async)?.counter}}</a></div>
+              <div class="col-xs-6 col-md-2" style="    margin-top: 2px;
+    margin-left: -14px;
+    margin-right: 16px;"> <a class="btn2 text-gray btn_like2"  (click)="hide(pos.$key)"> <i class="fa fa-comments" aria-hidden="true"> Commenter </i></a></div>
+              <div *ngIf="pos.type!=4" class="col-xs-6 col-md-2" style=" margin-top: 2px;"><a class="btn text-gray btn_like2 "  data-toggle="modal" [attr.data-target]="'#'+pos.$key+'3'"><i class="fa fa-share" aria-hidden="true"> Partage </i></a></div>
+              <div *ngIf="((pos.type==4)&&(pos.media!=null))" class="col-xs-6 col-md-2" style=" margin-top: 2px;"><a class="btn text-gray btn_like2 "  (click)="article_partage(pos.content,pos.media,pos.refdata,pos.$key,pos.title,pos.tarticle)"><i class="fa fa-share" aria-hidden="true"> Partage </i></a></div>
+              <div *ngIf="((pos.type==4)&&(pos.media==null))" class="col-xs-6 col-md-2" style=" margin-top: 2px;"><a class="btn text-gray btn_like2 "  (click)="article_partage(pos.content,'','',pos.$key,pos.title,pos.tarticle)"><i class="fa fa-share" aria-hidden="true"> Partage </i></a></div>
+            </div>
+
+
+
+            <div  class="post-container" >
+
+              <div class="post-detail" >
+                <div class="line-divider"></div>
+                <div  *ngFor="let com of get_liste(pos.$key) | async; trackBy: trackByFn">
+                  <div class="row">
+                  <div class="col-md-11" style="left: -16px; margin-bottom: -10px;">
+                    <div class="col-xs-12 col-sm-1">
+                          <img src="{{(get_name(com.comment_uid) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="profile-photo-sm" />
+                    </div>
+
+                      <div class="col-xs-12 col-sm-11" >
+                        <span>
+                          <a *ngIf="com.comment_uid!=currentuser" [routerLink]="['/pvisitor',com.comment_uid]" class="profile-link" style="margin-left: 0px;">
+                          {{(get_name(com.comment_uid) | async)?.name | titlecase  }}
+                          </a><a *ngIf="com.comment_uid==currentuser" [routerLink]="['/profile']" class="profile-link" style="margin-left: 0px;">
+                          {{(get_name(com.comment_uid) | async)?.name | titlecase  }}
+                          </a><i class="em em-laughing"></i> {{com.content}}
+                        </span>
+                      </div>
+
+                  </div>
+
+                  <div *ngIf="com.comment_uid==currentuser || pos.uid==currentuser " class="col-md-1"> <a class="dele" (click)="delete_comment(pos.$key,com.$key)">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </a></div>
+                  </div>
+
+                  <div class="row" style="margin-left: -23px">
+                    <div class="col-xs-6 col-sm-1"></div>
+                    <div class="col-xs-6 col-sm-3">
+                      <h6   style="cursor: pointer"> <i   (click)="likes_comment(pos.$key,currentuser,com.$key)" class="fa fa-thumbs-up" aria-hidden="true"  [class.highlighted]="(like_check_comm(pos.$key,com.$key) | async)[currentuser]"> J'aime</i> <span *ngIf="(like_check_counter(pos.$key,com.$key) | async)?.counter"><span data-toggle="modal" [attr.data-target]="'#'+com.$key"> &nbsp;| &nbsp;&nbsp;J'aime&nbsp;&nbsp; <span>{{(get_count_comment(pos.$key,com.$key) | async)?.counter}}</span></span></span></h6>
+                    </div>
+                  </div>
+
+                  <!--modal comment -->
+                  <div  *ngIf="(get_count_comment(pos.$key,com.$key) | async)?.counter>'0'">
+                    <div class="modal fade" id="{{com.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content" style="    width: 82%;left: 9%; height: 100%">
+
+                          <div class="modal-header">
+
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title"  style="color: cadetblue;">{{(get_count_comment(pos.$key,com.$key) | async)?.counter}} J'aime</h4>
+                          </div>
+                          <div class="modal-body" style="  height:495px;overflow:auto;">
+                            <form>
+                              <div *ngFor="let lil of like_liste_comment(pos.$key,com.$key)| async">
+                                <div class="row">
+                                  <div class="col-md-1"><img src="{{(get_name(lil.$key) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="profile-photo-sm"  style=" height: 60px;width: 60px;"/></div>
+                                  <div class="col-md-10" style="margin-left: 15px;">  <a *ngIf="lil.$key!=currentuser" data-dismiss="modal" [routerLink]="['/pvisitor',lil.$key]" class="profile-link" style="font-size: 16px;">{{(get_name(lil.$key) | async)?.name | titlecase  }} </a>
+                                    <a *ngIf="lil.$key==currentuser"  data-dismiss="modal" [routerLink]="['/profile']" class="profile-link" style="font-size: 16px;">{{(get_name(lil.$key) | async)?.name | titlecase  }} </a>
+                                    <p> {{(get_name(lil.$key) | async)?.poste }} </p>
+                                  </div>
+                                </div>
+                                <hr>
+                              </div>
+                            </form>
+                          </div>
+
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="post-comment">
+                  <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="profile-photo-sm" />
+                  <input #inputk type="text" class="form-control" placeholder="Post a comment" id="inputks{{pos.$key}}" (keyup.enter)="comment_post(inputk.value,pos.$key,currentuser,'inputks'+pos.$key)">
+                </div>
+              </div>
+            </div>
+<!--end post comennt-->
+            <div  *ngIf="(get_count_post(pos.$key) | async)?.counter>'0'">
+              <div class="modal fade" id="{{pos.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content" style="    width: 82%;left: 9%; height: 100%">
+
+                    <div class="modal-header">
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title"  style="color: cadetblue;">{{(get_count_post(pos.$key) | async)?.counter}} J'aime</h4>
+                    </div>
+                    <div class="modal-body" style="  height:495px;overflow:auto;">
+                      <form>
+                        <div *ngFor="let lil of like_liste(pos.$key)| async">
+                          <div class="row">
+                            <div class="col-md-1"><img src="{{(get_name(lil.$key) | async)?.avatar }}" default='https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd' alt="" class="profile-photo-sm"  style=" height: 60px;width: 60px;"/></div>
+                            <div class="col-md-10" style="margin-left: 15px;">  <a href="timeline.html" class="profile-link" style="font-size: 16px;">{{(get_name(lil.$key) | async)?.name | titlecase  }} </a>
+                              <p> {{(get_name(lil.$key) | async)?.poste }} </p>
+                            </div>
+                          </div>
+                          <hr>
+                        </div>
+                      </form>
+                    </div>
+
+
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- modal coment like-->
+
+  <!-- partage modal-->
+            <div *ngIf="pos.type!=1" >
+              <div class="modal fade" id="{{pos.$key}}3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document" style="margin-left: 19%;">
+                  <div class="modal-content" style="    width: 120%;left: 9%; height: 100%">
+
+                    <div class="modal-header">
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title"  style="color: cadetblue;">Partager</h4>
+                    </div>
+                    <div class="modal-body" style="  height:495px;overflow:auto;">
+                      <form>
+                       <textarea #contentt  class="focus_partage" style="border: none ;  resize: none;" placeholder="Dites quelque chose a propos de ceci...">{{pos.content}}</textarea>
+
+                        <video *ngIf="pos.type==3" class="post-video" controls> <source src="{{pos.media}}" type="video/mp4"> </video>
+                        <img *ngIf="pos.type==2" [src]="pos.media"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/erreur.PNG?alt=media&token=d62960c5-0a32-4a6a-97ea-e529a07741da" style=" margin-left: 12%;width: 500px;" class="center-align"/>
+
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" style=" background: #b1245d" id="F{{pos.$key}}" data-dismiss="modal">Annuler</button>
+                      <button *ngIf="pos.type==2" type="button" class="btn btn-primary" (click)="photo_partage(contentt.value,pos.media,pos.refdata,pos.$key)">Partager</button>
+                      <button *ngIf="pos.type==3" type="button" class="btn btn-primary" (click)="video_partage(contentt.value,pos.media,pos.refdata,pos.$key)">Partager</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="pos.type==1" >
+              <div class="modal fade" id="{{pos.$key}}3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                <div class="modal-dialog" role="document" style="margin-left: 19%;">
+                  <div class="modal-content" style="    width: 120%;left: 9%; height: 100%">
+
+                    <div class="modal-header">
+
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title"  style="color: cadetblue;">Partager</h4>
+                    </div>
+                    <div class="modal-body" style="overflow:auto;">
+                      <form>
+                        <textarea #contentt autosize  class="focus_partage" cols="70" rows="7" class="form-control"  style="resize: none;" placeholder="Dites quelque chose a propos de ceci...">{{pos.content}}</textarea>
+                      </form>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-primary" style=" background: #b1245d"  id="F{{pos.$key}}" data-dismiss="modal">Annuler</button>
+                      <button  type="button" class="btn btn-primary" (click)="post_partage(contentt.value,pos.$key)">Partager</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!--fffff-->
+          </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Newsfeed Common Side Bar Right
+        ================================================= -->
+        <div class="fixed col-md-2" style="left: 74.5%;">
+          <div class="right-content" id="sticky-sidebar">
+            <div class="suggestions" >
+              <br>
+              <h4 class="grey">Sponsored</h4>
+              <div class="friend-card">
+                <img src="./src/app/home/images/covers/1.jpg" alt="profile-cover" class="img-responsive cover" />
+                <div class="card-info">
+                  <div class="friend-info">
+                    <a href="#" class="pull-right text-green">My Friend</a>
+                    <h5><a href="timeline.html" class="profile-link">Sophia Lee</a></h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu  </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer
+  ================================================= -->
+  <footer id="footer" *ngIf="footer">
+
+    <div class="copyright">
+      <p> © 2017</p>
+    </div>
+  </footer>
+</div>

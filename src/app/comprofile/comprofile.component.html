@@ -1,0 +1,347 @@
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div *ngIf="loader" class="loader" id="loader-1" style="    margin-top: 20%;"> </div>
+<div *ngIf="!loader">
+  <div class="profile">
+
+    <!--==========================================
+                     HEADER
+    ===========================================-->
+    <div class="row">
+      <div class="col-md-12" style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+        <div *ngFor="let cov of user | async"  id="header" class="shadow" style="overflow: hidden">
+          <!-- Navigation -->
+
+
+          <!-- Name and Status -->
+          <div  *ngIf="charg[0]==true" id="intro" class="container" style="margin-bottom: 24%">
+            <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" left:106%; margin-bottom: -8%;" data-toggle="modal" data-target="#cover">
+              <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+            </a>
+            <div>
+              <div class="blob blob-0"></div>
+              <div class="blob blob-1"></div>
+              <div class="blob blob-2"></div>
+              <div class="blob blob-3"></div>
+              <div class="blob blob-4"></div>
+              <div class="blob blob-5"></div>
+            </div>
+
+          </div>
+          <div  *ngIf="charg[0]!=true" id="intro" class="container"  >
+            <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" left:106%; margin-bottom: -8%;" data-toggle="modal" data-target="#cover">
+              <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+            </a>
+            <img class="background" src="{{cov.cover}}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/cover.jpg?alt=media&token=7a6ddfdb-985d-444a-9876-127b68a1e484" style="z-index: 1;margin-left: -17%;margin-top: -2%;" >
+
+
+          </div>
+        </div>
+
+      </div>
+
+      <!--==========================================
+                     ABOUT
+      ===========================================-->
+      <section id="about" class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+
+              <!-- Profile Picture [Square] -->
+              <div  *ngFor="let ava of user | async" class="contain">
+                <div id="profile" class="center-block">
+                  <img src="{{ava.avatar}}"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" style="
+    z-index: 2;
+    margin-bottom: -6pc;
+">
+                  <div class="overlay2"></div>
+                  <div class="buttonav"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="right: 32%;bottom: 6.3pc;" data-toggle="modal" data-target="#avatar">
+                    <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                  </a></div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Download & Contact Button -->
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+              <!-- Social Links -->
+              <div id="intro-div" class="card content-wrapper">
+
+                <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" right: -42%;     margin-bottom: -2%;    top: 10px;" data-toggle="modal" data-target="#data1">
+                  <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                </a>
+                <div *ngFor="let users of user | async">
+                  <ul class="text-center list-inline">
+
+                    <div style="font-size: 1.7em; margin-top: -5%;"> {{users.name | titlecase}}<br> {{users.spec | titlecase}}
+                    </div>
+                  </ul>
+
+
+
+                </div>
+
+
+                <!-- Your CV File -->
+                <a [routerLink]="['/cjob',current]" class="btn waves-effect waves-light btn-primary custom-btn" style="width: 21.5%;">Voir les offres d’emploi</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+      <section  class="section" style="margin-top: -4pc;">
+        <div class="container">
+          <div class="row">
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+
+              <!-- Profile Picture [Square] -->
+            </div>
+          </div>
+          <div class="row">
+            <!-- Download & Contact Button -->
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+              <!-- Social Links -->
+              <div class="card content-wrapper">
+
+                <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" right: -43.3%;margin-bottom: -2%;    top: 10px;" data-toggle="modal" data-target="#data">
+                  <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                </a>
+                <div *ngFor="let users of user | async">
+                  <h5 style="text-align: start;">Adress</h5>
+                  <p style="text-align: start;">{{users.adr | titlecase}}</p>
+                  <h5 style="text-align: start;">Téléphone</h5>
+                  <p style="text-align: start;">{{users.tel}}</p>
+                  <h5 style="text-align: start;">Site Web</h5>
+                  <p style="text-align: start;"><a target="_blank" href="http://{{users.site}}" style="cursor: pointer">{{users.site}}</a></p>
+                  <h5 style="text-align: start;">Déscription</h5>
+                  <!-- Some Intro About You -->
+                  <p style="text-align: start;">
+                    {{users.desc}}
+
+
+                  </p>
+
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+
+
+
+      <!--==========================================
+                  CONTACT
+      ===========================================-->
+      <section id="contact" class="section" style="display: none;">
+
+        <div class="container">
+
+
+          <!-- Location MAP -->
+          <div class="row">
+            <div class="col col-md-12 col-sm-12 col-xs-12">
+              <div id="google-map" data-aos="zoom-in" data-aos-delay="0" data-aos-offset="0">
+                <div id="map-container"></div>
+                <div id="cd-zoom-in" class="custom-btn"><i class="material-icons text-center">add</i></div>
+                <div id="cd-zoom-out" class="custom-btn"><i class="material-icons text-center">remove</i></div>
+                <!-- Your address here -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+      <!-- Back To Top Button -->
+      <a href="#header" id="btp" class="back-to-top btn-floating waves-effect waves-light btn-large custom-btn">
+        <i class="ion-ios-arrow-up"></i>
+      </a>
+
+
+    </div>
+    <!-- modale name , poste , about , adress  -->
+    <div class="modal fade" id="data1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div *ngFor="let users of user | async">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" style="margin-left: 21%;color: cadetblue;">Modifier vos Données</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label" style="font-size: 12px;">Nom:</label>
+
+
+
+                  <input #name type="text" class="form-control"  style="font-size: 20px;" value="{{users.name}}">
+                </div>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label" style="font-size: 12px;">Spécialisation:</label>
+                  <input #spec type="text" class="form-control"  style="font-size: 20px;" value="{{users.spec}}">
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="g1fermer">Fermer</button>
+              <button type="button" class="btn btn-primary" style="margin-right: 25%;" (click)="updatedata1(name.value,spec.value)"  >Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end .. modale name , poste , about , adress  -->
+    <!-- modale name , poste , about , adress  -->
+    <div class="modal fade" id="data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div *ngFor="let users of user | async">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="exampleModalLabel" style="margin-left: 21%;color: cadetblue;">Modifier vos Données</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label" style="font-size: 12px;">Adresse:</label>
+
+
+
+                  <input #adr type="text" class="form-control" id="recipient-name" style="font-size: 20px;" value="{{users.adr}}">
+                </div>
+
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label" style="font-size: 12px;">Téléphone:</label>
+                  <input #tel type="text" class="form-control" id="recipient-nam" style="font-size: 20px;" value="{{users.tel}}">
+                </div>
+                <div class="form-group">
+                  <label for="recipient-name" class="control-label" style="font-size: 12px;">Site Web:</label>
+                  <input  #site type="text" class="form-control" id="recipient-n" style="font-size: 20px;" value="{{users.site}}">
+                </div>
+                <div class="form-group">
+                  <label for="message-text" class="control-label" style="font-size: 12px;">Déscription:</label>
+                  <textarea #desc class="form-control" id="message-text" rows="7"  style=" resize: none;" >{{users.desc}}</textarea>
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="gfermer">Fermer</button>
+              <button type="button" class="btn btn-primary" style="margin-right: 25%;" (click)="updatedata2(adr.value,tel.value,desc.value,site.value)"  >Enregistrer</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end .. modale name , poste , about , adress  -->
+
+
+    <!-- modale cover -->
+    <div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content-cover">
+          <div *ngFor="let users of user | async">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title"  style="margin-left: 24%;color: cadetblue;">Modifier photo de couverture</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+
+
+
+                <div class="form-group">
+
+                  <button type="button" class="btn btn-primary" (click)="get_cover_element('custom-input1')"  style="margin-left: 36%;"  > <i class="fa fa-upload" aria-hidden="true"></i> Upload Cover</button>
+                </div>
+                <div class="form-group">
+                  <div class="file-upload">
+
+                    <input id="custom-input1" type="file" (change)="fileChangeListener($event)"  style="display:none;">
+                  </div>
+                  <img-cropper  #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+
+
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="covfermer">Fermer</button>
+              <button type="button" class="btn btn-primary" style="margin-right: 30.5%;"   (click)="cover_update(data.image)"  >update cover</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end .. cover  -->
+    <!-- modale cover -->
+    <div class="modal fade" id="avatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content-cover">
+          <div *ngFor="let users of user | async">
+            <div class="modal-header">
+
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title"  style="margin-left: 24%;color: cadetblue;">Modifier photo de couverture</h4>
+            </div>
+            <div class="modal-body">
+              <form>
+
+
+
+                <div class="form-group">
+
+                  <button type="button" class="btn btn-primary" (click)="get_cover_element('custom-input2')"  style="margin-left: 36%;"  > <i class="fa fa-upload" aria-hidden="true"></i> Upload Avatar</button>
+                </div>
+                <div class="form-group">
+                  <div class="file-upload" style="margin-left: 90px;">
+
+                    <img-cropper  #cropper [image]="data2" [settings]="cropperSettings2" [id]="custom" (onCrop)="cropped($event)"></img-cropper>
+                  </div>
+
+
+
+
+                </div>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal" id="avfermer">Fermer</button>
+              <button type="button" class="btn btn-primary" style="margin-right: 30.5%;"   (click)="avatar_update(data2.image)"  >update cover</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--  end .. avatar -->
+
+  </div>
+
+
+

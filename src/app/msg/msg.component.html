@@ -1,0 +1,36 @@
+<div class="chat-room">
+<div class="scrollbar-wrapper wrapper scrollbar-outer">
+<div  class="tab-pane active" >
+<div  class="chat-body">
+<ul   class="chat-message">
+<div #scrollMe class="bs-example" >
+<div *ngFor="let message of messages | async">
+
+<li  #scrollMe class="right" *ngIf="!isMe(message.uid)">
+<img src="{{message.pic}}" alt="" class="profile-photo-sm pull-right" />
+<div class="chat-item">
+<div class="chat-item-header">
+<h5>{{ message.name}}</h5>
+<small class="text-muted">{{ message.startedAt | date:"MM/dd/yy hh:mm a"  }}</small>
+</div>
+<p>{{ message.message }}</p>
+</div>
+</li>
+
+<li   #scrollMe  class="left" *ngIf="isMe(message.uid)">
+<img src="{{ message.pic }}" alt="" class="profile-photo-sm pull-left" />
+<div class="chat-item">
+<div class="chat-item-header">
+<h5>{{ message.name}}----- {{i2}}  </h5>
+<small class="text-muted">{{ message.startedAt | date:"MM/dd/yy hh:mm a" }}</small>
+</div>
+<p>{{ message.message }}</p>
+</div>
+</li>
+</div>
+</div>
+</ul>
+</div>
+</div>
+</div>
+</div>

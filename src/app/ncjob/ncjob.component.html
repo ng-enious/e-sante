@@ -1,0 +1,88 @@
+<div class="listpgWraper">
+      <div class="container">
+
+
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+
+              <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <div *ngIf="x[0]==0" style="margin-bottom: 66%;"> <h2 style="color: #27aae1;font-weight: 400; margin-top: 7%;">Vous n'avez aucune offre a consulter</h2></div>
+              <div *ngIf="x[0]==1" style="margin-bottom: 53%;">
+              <li  style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of jobs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img style="border-radius: 100%;" src="{{ (get_company(docc.cid) | async)?.avatar }}" alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{docc.poste|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_company(docc.cid) | async)?.name }}</a></div>
+                      <div class="companyName"><p></p></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/jdetail',docc.$key]">ouvrir</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{docc.description | summary}}</p>
+              </li>
+              </div>
+
+              <div *ngIf="x[0]>1" style="margin-bottom: 7%;">
+                <li  style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of jobs | async">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                      <div class="jobimg"><img style="border-radius: 100%;" src="{{ (get_company(docc.cid) | async)?.avatar }}" alt="Job Name" /></div>
+                      <div class="jobinfo">
+                        <h3><a>{{docc.poste|titlecase}}</a></h3>
+                        <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_company(docc.cid) | async)?.name }}</a></div>
+                        <div class="companyName"><p></p></div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/jdetail',docc.$key]">ouvrir</a></div>
+                    </div>
+                  </div>
+                  <p style="margin-left: 9px;">{{docc.description | summary}}</p>
+                </li>
+              </div>
+              <!-- job end -->
+
+              <!-- job start -->
+
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Footer end-->
+
+    <!--Copyright-->
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>

@@ -1,0 +1,193 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+
+
+
+<div class="forum">
+  <div id="wrapper">
+
+
+    <header class="header">
+      <div class="container-fluid">
+
+      </div><!-- end container -->
+    </header><!-- end header -->
+
+
+
+    <section class="section lb">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="widget nopadding clearfix">
+              <div class="panel panel-primary nopadding">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Rechercher des sujets d'aide populaires</h3>
+                </div>
+                <div class="panel-body">
+                  <div class="site-search">
+                    <div class="form-group label-floating">
+                      <label class="control-label" for="focusedInput2">Comment puis-je vous aider aujourd'hui ?</label>
+                      <input class="form-control" #search  [(ngModel)]="keyword" id="focusedInput2" autocomplete="off" type="text">
+                    </div>
+                    <div class="form-group clearfix"> <!-- inline style is just to demo custom css to put checkbox below input above -->
+
+                      <div class="submit-button pull-left">
+                        <a class="btn btn-raised btn-info gr" [routerLink]="['/forumsearch', keyword]"><i class="material-icons">search</i> Rechercher</a>
+                      </div>
+                    </div>
+                  </div><!-- end well -->
+                </div>
+              </div>
+            </div><!-- end widget -->
+
+
+     <!--<li *ngFor="let destination of destinations | searchFilter: search.value" class="destination">-->
+              <!--<div class="box destination-wrapper">-->
+                <!--<span class="flag" >{{destination.key}}</span>-->
+                <!--<span><strong>{{destination.uid}}</strong> </span>-->
+                <!--<span>{{destination.title}} for <span class="currency">$</span><span class="price">{{destination.key}}</span></span>-->
+              <!--</div>-->
+            <!--</li>-->
+
+
+            <div class="home-tab clearfix">
+              <ul class="nav nav-tabs">
+                <li ><a href="#knowledge_tab">Publier une nouvelle publication</a></li>
+
+              </ul>
+
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                <div class="panel panel-default">
+                  <article class="well btn-group-sm clearfix">
+                    <div data-toggle="collapse" data-parent="#accordion" href="#collapseO" aria-expanded="true" aria-controls="collapseO"  class="btn btn-info btn-fab" style="    margin-left: 1073px;
+    margin-top: -72px;      border-radius: 4pc;">
+                      <i class="material-icons">add</i>
+                    </div>
+                    <div class="ripple-container"></div>
+
+
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <div class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseO" aria-expanded="true" aria-controls="collapseO">
+                          <header class="topic-title clearfix" style="margin-top: -17px;">
+                            <h3>Cliquez ici pour publier quelque chose</h3>
+
+                          </header>
+                        </a>
+                      </div>
+                    </div>
+                    <div id="collapseO" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+
+                        <div class="topic-desc row-fluid clearfix">
+                          <div class="col-sm-2">
+                            <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="avatar img-circle img-responsive">
+                          </div>
+                          <div class="col-sm-10">
+                            <h4>{{ (get_name(currentuser) | async)?.name | titlecase}}</h4>
+                            <small>{{ (get_name(currentuser) | async)?.poste | titlecase}}</small>
+                            <div class="form-group label-floating">
+                              <textarea placeholder="Saisir le titre du sujet" rows="1" cols="100" class="form-control" #title></textarea>
+                            </div>
+                            <div class="form-group label-floating">
+                              <textarea placeholder="Déscription" rows="4" cols="100" class="form-control" #desc></textarea>
+                            </div>
+
+
+                            <div class="alert-container"  [style.left]="getLeft()" [style.right]="getRight()">
+                              <nac-alert-center animation="'fancy'"></nac-alert-center>
+                            </div>
+
+                            <button class="btn btn-raised btn-info gr" (click)="post_a_post(title.value,desc.value)">Publier</button>
+                          </div>
+                        </div><!-- end tpic-desc -->
+
+
+                      </div><!-- end panel-body -->
+                    </div><!-- end panel-collapse -->
+                  </article><!-- end article well -->
+                </div><!-- end panel -->
+
+
+
+
+
+
+
+                <!-- second one-->
+                <div class="home-tab clearfix">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#knowledge_tab">Liste des publications</a></li>
+
+                  </ul>
+
+                  <div class="tab-content">
+                    <div id="knowledge_tab" class="tab-pane fade in active">
+                      <aside class="topic-list">
+                        <div *ngIf="loader" >
+                          <br>
+                          <div  class="loader" id="loader-1"></div>
+                        </div>
+                        <div class="panel panel-default" *ngFor="let pos of post | async">
+                          <article class="well btn-group-sm clearfix">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                              <div class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{pos.$key}}" aria-expanded="false" aria-controls="collapseTwo">
+                                  <header class="topic-title clearfix">
+                                    <h3>{{pos.title}}</h3>
+                                    <small>{{ (get_name(pos.uid) | async)?.name | titlecase }}</small>
+                                    <small>{{ pos.date*-1 | date:"dd/MM/yy hh:mm a" }}</small>
+                                  </header>
+                                </a>
+                              </div>
+                            </div>
+                            <div id="{{pos.$key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                              <div class="panel-body">
+
+
+                                <div class="topic-desc row-fluid clearfix">
+                                  <div class="col-sm-2">
+                                    <img src="{{ (get_name(pos.uid) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="" class="avatar img-circle img-responsive">
+                                  </div>
+                                  <div class="col-sm-10">
+                                    <h4>{{ (get_name(pos.uid) | async)?.name | titlecase }}</h4>
+                                    <small>{{ (get_name(pos.uid) | async)?.poste | titlecase }}</small>
+                                    <p> {{pos.desc |summary}}</p>
+                                    <a [routerLink]="['/forum',pos.$key]" class="readmore" title="">continuer la lecture →</a>
+                                  </div>
+                                </div><!-- end tpic-desc -->
+
+
+                              </div><!-- end panel-body -->
+                            </div><!-- end panel-collapse -->
+                          </article><!-- end article well -->
+                        </div><!-- end panel -->
+
+
+                      </aside>
+                    </div><!-- end panel-group -->
+
+
+
+                  </div><!-- end tab pane -->
+
+
+                </div><!-- end tab-content -->
+              </div><!-- end home-tab -->
+            </div><!-- end col -->
+
+          </div><!-- end row -->
+        </div>
+      </div><!-- end container -->
+    </section><!-- end section -->
+
+
+
+
+
+
+  </div>
+</div>
+<!-- end wrapper -->

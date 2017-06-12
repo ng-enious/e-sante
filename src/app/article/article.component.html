@@ -1,0 +1,36 @@
+
+<div>
+  <div class="alert-container"  [style.left]="getLeft()" [style.right]="getRight()">
+    <nac-alert-center animation="'fancy'"></nac-alert-center>
+  </div>
+
+  <div class="row" style="    margin-right: 40px;
+    margin-bottom: 14px;
+    margin-top: 17px;">
+    <div class="col-xs-6 col-md-3"></div>
+    <div class="col-xs-6 col-md-5">
+      <div class="col-md-2"><span style="color: #ce4844;font-size: 21px;">Titre :</span> </div>
+      <div class="col-md-10"><input type="text" #textt class="form-control" required></div>
+
+      </div>
+    <div class="col-xs-6 col-md-2"></div>
+  </div>
+
+  <simple-tiny
+    [elementId]="'my-editor-id'"
+    (onEditorKeyup)="keyupHandlerFunction($event)" #artic >
+  </simple-tiny>
+  <button class="btn btn-primary" style="margin-top: 7px; margin-left: 36pc;
+    padding: 7px 32px;
+    font-size: 16px;" (click)="senddata(textt.value)">Publier</button>
+  <span id="fileselector">
+        <label class="btn btn-default"  style="height: 40px;
+    margin-top: 8px;
+    padding-top: 9px;" (click)="getelement()">
+
+            <i class="fa fa-camera" aria-hidden="true" ></i>
+        </label>
+    {{getfilename(phot)}} <i  *ngIf="phot.value!=''" class="close" style="font-style: inherit;font-size: 21px;float: none;" (click)="videfile()">x</i>
+    </span>
+  <input  #phot id="upload-file-selector" type="file" style="display: none" (change)="handleFileTarget($event)">
+</div>

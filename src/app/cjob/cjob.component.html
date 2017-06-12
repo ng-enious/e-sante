@@ -1,0 +1,217 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div style="margin-bottom: 12px;"> </div>
+<md-tab-group >
+  <md-tab position='2'>
+    <ng-template md-tab-label>
+     <div id="my"> <i class="fa fa-briefcase" aria-hidden="true"></i><span> Mes offres d'emploi</span></div>
+    </ng-template>
+
+    <div class="listpgWraper">
+      <div class="container">
+
+
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+
+              <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <div *ngIf="x[0]==0" style="margin-bottom: 62%;"> <h2 style="color: #27aae1;font-weight: 400;">Vous n'avez aucune offre publiée</h2></div>
+              <div *ngIf="x[0]==1" style="margin-bottom: 36%;">
+                <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of jobs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img style="border-radius: 100%;" src="{{ (get_company(docc.cid) | async)?.avatar }}" alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{docc.poste|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_company(docc.cid) | async)?.name }}</a></div>
+                      <div class="companyName"><p></p></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/jdetail',docc.$key]">ouvrir</a></div>
+                    <div style="margin-top: 14px;" class="listbtn"><a style="background: #d06029; cursor:pointer;" data-toggle="modal" [attr.data-target]="'#'+docc.$key">Modifier</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{docc.description | summary}}</p>
+              </li></div>
+             <div *ngIf="x[0]>1">
+
+               <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of jobs | async">
+                 <div class="row">
+                   <div class="col-md-8 col-sm-8">
+                     <div class="jobimg"><img style="border-radius: 100%;" src="{{ (get_company(docc.cid) | async)?.avatar }}" alt="Job Name" /></div>
+                     <div class="jobinfo">
+                       <h3><a>{{docc.poste|titlecase}}</a></h3>
+                       <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_company(docc.cid) | async)?.name }}</a></div>
+                       <div class="companyName"><p></p></div>
+                     </div>
+                     <div class="clearfix"></div>
+                   </div>
+                   <div class="col-md-4 col-sm-4">
+                     <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/jdetail',docc.$key]">ouvrir</a></div>
+                     <div style="margin-top: 14px;" class="listbtn"><a style="background: #d06029; cursor:pointer;" data-toggle="modal" [attr.data-target]="'#'+docc.$key">Modifier</a></div>
+                   </div>
+                 </div>
+                 <p style="margin-left: 9px;">{{docc.description | summary}}</p>
+               </li>
+             </div>
+
+              <!-- job end -->
+
+              <!-- job start -->
+
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Footer end-->
+
+    <!--Copyright-->
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>
+
+  </md-tab>
+  <md-tab >
+    <ng-template md-tab-label>
+      <i class="fa fa-pencil" aria-hidden="true"></i><span> Publier un offre d'emploi</span>
+    </ng-template>
+    <md-card>
+      <md-input-container style="margin-left: 6%;" >
+        <input mdInput #pos placeholder="Poste" value="" size="63">
+
+      </md-input-container>
+
+      <md-input-container style="margin-left:12%;" class="demo-full-width">
+        <input mdInput #etud placeholder="Niveau d'étude" value="" size="63">
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left:6%;" class="demo-full-width">
+        <input mdInput #exp placeholder="Expericences" value="" size="63">
+      </md-input-container>
+
+      <md-input-container style="margin-left:12%;" class="demo-full-width">
+        <textarea mdInput #desc placeholder="Déscription" id="descc" rows="7" cols="63" style=" resize: none;"></textarea>
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left: 6%; margin-top: 2;" >
+        <input mdInput #exig placeholder="Exigences" value="" size="63">
+      </md-input-container>
+      <md-input-container style="margin-left: 12%;margin-top: 2%;" >
+        <input mdInput #avant placeholder="Avantages" value="" size="63">
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left: 6%;margin-top: 3%;" >
+        <input mdInput #sal placeholder="Salaire" value="" size="63">
+      </md-input-container>
+      <md-input-container style="margin-left: 12%; margin-top: 3%;" >
+        <input mdInput #empla placeholder="Emplacement" value="" size="63">
+      </md-input-container>
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-3" style=" margin-left: 6%;
+    width: 16%; cursor: pointer"> <a (click)="create_job(pos.value,etud.value,exp.value,desc.value,exig.value,avant.value,sal.value,empla.value)" style="margin-top: 20%;background: #00a2ff;
+    color: #fff;
+    padding: 13px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 0;
+    display: block;"><span style="margin-left: 10%;">Publier l'offre</span></a>
+        </div>
+      </div>
+      <br>
+
+    </md-card>
+  </md-tab>
+
+
+
+</md-tab-group>
+
+<!--modal start-->
+<div *ngFor="let doc of jobs | async">
+  <div class="modal fade" id="{{doc.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 33%;color: cadetblue;">Modifier l'offre</h4>
+        </div>
+        <div class="modal-body">
+
+          <md-input-container style="width: 100%;" >
+            <input mdInput #pos placeholder="Poste" value="{{doc.poste}}" size="63">
+
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" class="demo-full-width">
+            <input mdInput #etud placeholder="Niveau d'étude" value="{{doc.niveau}}" size="63">
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" class="demo-full-width">
+            <input mdInput #exp placeholder="Expericences" value="{{doc.experience}}" size="63">
+          </md-input-container>
+          <br>
+          <br>
+          <md-input-container style="width: 100%;" class="demo-full-width">
+            <textarea mdInput #desc placeholder="Déscription" rows="5" cols="63" style=" resize: none;">{{doc.description}}</textarea>
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" >
+            <input mdInput #exig placeholder="Exigences" value="{{doc.exigence}}" size="63">
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" >
+            <input mdInput #avant placeholder="Avantages" value="{{doc.avantage}}" size="63">
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" >
+            <input mdInput #sal placeholder="Salaire" value="{{doc.salaire}}" size="63">
+          </md-input-container>
+          <br>
+          <md-input-container style="width: 100%;" >
+            <input mdInput #empla placeholder="Emplacement" value="{{doc.loc}}" size="63">
+          </md-input-container>
+
+
+        </div>
+        <div class="modal-footer" style="padding: 5px;">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 50%;" (click)="delete_job(doc.$key)" >Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="fe{{doc.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="update_job(pos.value,etud.value,exp.value,desc.value,exig.value,avant.value,sal.value,empla.value,doc.$key)" >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

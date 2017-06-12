@@ -1,0 +1,425 @@
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div *ngIf="loader" class="loader" id="loader-1" style="    margin-top: 20%;"> </div>
+<div *ngIf="!loader">
+  <div class="profile">
+
+    <!--==========================================
+                     HEADER
+    ===========================================-->
+    <div class="row">
+      <div class="col-md-12" style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+        <div *ngFor="let cov of user | async"  id="header" class="shadow" style="overflow: hidden">
+          <!-- Navigation -->
+
+
+          <!-- Name and Status -->
+          <div  id="intro" class="container">
+
+            <img class="background" src="{{cov.cover}}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/cover.jpg?alt=media&token=7a6ddfdb-985d-444a-9876-127b68a1e484" style="z-index: 1;margin-left: -17%;margin-top: -2%;" >
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!--==========================================
+                   ABOUT
+    ===========================================-->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+
+            <!-- Profile Picture [Square] -->
+            <div  *ngFor="let ava of user | async" class="contain">
+              <div id="profile" class="center-block">
+                <img src="{{ava.avatar}}"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" style="
+    z-index: 2;
+    margin-bottom: -6pc;
+">
+
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <!-- Download & Contact Button -->
+          <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+            <!-- Social Links -->
+            <div id="intro-div" class="card content-wrapper">
+
+
+              <div *ngFor="let users of user | async">
+                <ul class="text-center list-inline">
+
+                  <div style="font-size: 1.7em;"> {{users.name | titlecase}} <br> {{users.poste | titlecase}} <br> {{users.address | titlecase}}
+                  </div>
+
+                </ul>
+
+                <!-- Some Intro About You -->
+                <p class="text-center">
+                  {{users.about}}
+
+
+                </p>
+              </div>
+
+
+
+              <button *ngIf="request[0]==0 && friends[0]==0 && requestme[0]==0" type="button" class="btn btn-default dropdown-toggle" style="text-transform: capitalize;" (click)="send_request()">
+                <i class="ion ion-android-person-add"></i> Ajouter
+              </button>
+
+              <div *ngIf="request[0]!=0 && friends[0]==0 && requestme[0]==0" class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" style="text-transform: capitalize;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="ion ion-android-person-add"></i> invitation envoyée
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="margin-top: 0px;">
+                  <li><a (click)="delete_request()" style="cursor: pointer">Annuler l'invitation</a></li>
+                </ul>
+              </div>
+
+              <div *ngIf="requestme[0]!=0 && friends[0]==0" class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" style="text-transform: capitalize;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-user" aria-hidden="true"></i> Répondre ..
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="margin-top: 0px;">
+                  <li><a (click)="accept_friend()" style="cursor: pointer">Accepter l'invitation</a></li>
+                  <li><a (click)="delete_request_me()" style="cursor: pointer">Réfuser l'invitation</a></li>
+                </ul>
+              </div>
+
+
+              <div   *ngIf="friends[0]!=0" class="btn-group" role="group">
+                <button type="button" class="btn btn-default dropdown-toggle" style="text-transform: capitalize;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="glyphicon glyphicon-ok" aria-hidden="true"></i> amis
+                  <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" style="margin-top: 0px;">
+                  <li><a (click)="delete_friend()" style="cursor: pointer">Retirer de la liste d'amis</a></li>
+                </ul>
+              </div>
+
+              <button  type="button" class="btn btn-default dropdown-toggle" style="text-transform: capitalize;" data-toggle="modal" data-target="#myModal">
+                <i class="ion ion-email"></i> Message
+              </button>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!--==========================================
+                       EXPERIENCE
+    ===========================================-->
+    <section *ngIf="exper[0]" id="experience" class="section">
+      <div>
+        <h4 class="text-uppercase text-center">Experience
+
+        </h4>
+
+
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Timeline -->
+            <div class="timeline center-block">
+
+              <ul >
+
+                <li *ngFor="let exp of experiences | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                  <i class="title-icon fa fa-circle"></i>
+                  <div class="timeline-content">
+
+                    <!-- Heading -->
+                    <div class="timeline-header">
+                      <div class="row" style="    margin-bottom: 2px;">
+
+                        <div class="col-md-10"><h3 class="text-capitalize">{{exp.Poste | titlecase}}</h3></div>
+
+
+                      </div>
+                    </div>
+
+                    <!-- Organization and Period -->
+                    <p class="sub-heading">{{exp.Organisation | titlecase}}</p>
+                    <p class="sub-heading">{{exp.Dated | date:'d MMMM yyyy'}} - {{exp.Datef | date:'d MMMM yyyy'}}</p>
+
+                    <!-- Job Summary -->
+                    <p class="content-p">
+                      {{exp.about}}
+                    </p>
+                  </div>
+                </li>
+
+
+
+
+
+
+
+
+              </ul>
+            </div>
+            <!-- End of Timeline -->
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!--==========================================
+                       EDUCATION
+    ===========================================-->
+    <section  *ngIf="fformation[0]" id="education" class="section">
+      <h4 class="text-uppercase text-center">Formations</h4>
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Timeline -->
+            <div class="timeline center-block">
+              <ul>
+                <li  *ngFor="let fo of formation | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                  <i class="title-icon fa fa-circle"></i>
+                  <div class="timeline-content">
+
+                    <!-- Heading -->
+                    <div class="timeline-header">
+                      <div class="row" style="    margin-bottom: 2px;">
+
+                        <div class="col-md-10"><h3 class="text-capitalize">{{fo.diplom | titlecase}}</h3></div>
+                        <div class="col-md-2"> </div>
+
+                      </div>
+                    </div>
+
+                    <!-- Institution, Period & result -->
+                    <p class="sub-heading">{{fo.fac | titlecase}}</p>
+                    <p class="sub-heading">{{fo.Dated | date:'d MMMM yyyy'}} - {{fo.Datef | date:'d MMMM yyyy'}}</p>
+
+
+                    <!-- Education Summary -->
+                    <p class="content-p">
+                      {{fo.about}}
+                    </p>
+                  </div>
+                </li>
+
+
+              </ul>
+            </div>
+            <!-- End of Timeline -->
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!--==========================================
+                   CERTIFICATION
+    ===========================================-->
+    <section  *ngIf="fcerti[0]" id="certification" class="section">
+      <h4 class="text-uppercase text-center">Certification</h4>
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Timeline -->
+            <div class="timeline center-block">
+              <ul>
+                <li *ngFor="let cer of certification | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                  <i class="title-icon fa fa-circle"></i>
+                  <div class="timeline-content">
+
+                    <!-- Heading -->
+                    <div class="timeline-header">
+                      <div class="row" style="    margin-bottom: 2px;">
+
+                        <div class="col-md-10"><h3 class="text-capitalize">{{cer.titre | titlecase}}</h3></div>
+                        <div class="col-md-2"></div>
+
+                      </div>
+                    </div>
+
+                    <!-- Institution, Period & result -->
+                    <p class="sub-heading">{{cer.autority | titlecase}}</p>
+                    <p class="sub-heading">{{cer.Date | date:'d MMMM yyyy'}}</p>
+
+
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+            <!-- End of Timeline -->
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!--==========================================
+                   Organisation
+    ===========================================-->
+    <section   *ngIf="organis[0]" id="Organisation" class="section">
+      <h4 class="text-uppercase text-center">Organisation </h4>
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Timeline -->
+            <div class="timeline center-block">
+              <ul>
+                <li *ngFor="let exps of organisation | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                  <i class="title-icon fa fa-circle"></i>
+                  <div class="timeline-content">
+
+                    <!-- Heading -->
+                    <div class="timeline-header">
+                      <div class="row" style="    margin-bottom: 2px;">
+
+                        <div class="col-md-10"><h3 class="text-capitalize">{{exps.Poste | titlecase}}</h3></div>
+                        <div class="col-md-2"></div>
+
+                      </div>
+                    </div>
+
+                    <!-- Organization and Period -->
+                    <p class="sub-heading">{{exps.Organisation | titlecase}}</p>
+                    <p class="sub-heading">{{exps.Dated | date:'d MMMM yyyy'}} - {{exps.Datef | date:'d MMMM yyyy'}}</p>
+
+                    <!-- Job Summary -->
+                    <p class="content-p">
+                      {{exps.about}}
+                    </p>
+                  </div>
+                </li>
+
+
+
+              </ul>
+            </div>
+            <!-- End of Timeline -->
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+    <!--==========================================
+                     LAngue
+    ===========================================-->
+    <section  *ngIf="llangue[0]" id="langue" class="section">
+      <h4 class="text-uppercase text-center">Langue</h4>
+      <div class="container">
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+
+            <!-- Timeline -->
+            <div class="timeline center-block">
+              <ul>
+                <li  *ngFor="let ln of langue | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                  <i class="title-icon fa fa-circle"></i>
+                  <div class="timeline-content">
+
+                    <!-- Heading -->
+                    <div class="timeline-header">
+                      <div class="row" style="    margin-bottom: 2px;">
+
+                        <div class="col-md-10"><h3 class="text-capitalize">{{ln.langue}}</h3></div>
+                        <div class="col-md-2">  </div>
+
+                      </div>
+                    </div>
+
+
+                  </div>
+                </li>
+
+              </ul>
+            </div>
+            <!-- End of Timeline -->
+          </div>
+        </div>
+      </div>
+
+
+    </section>
+
+
+
+
+
+    <!--==========================================
+                CONTACT
+    ===========================================-->
+    <section id="contact" class="section" style="display: none;">
+
+      <div class="container">
+
+
+        <!-- Location MAP -->
+        <div class="row">
+          <div class="col col-md-12 col-sm-12 col-xs-12">
+            <div id="google-map" data-aos="zoom-in" data-aos-delay="0" data-aos-offset="0">
+              <div id="map-container"></div>
+              <div id="cd-zoom-in" class="custom-btn"><i class="material-icons text-center">add</i></div>
+              <div id="cd-zoom-out" class="custom-btn"><i class="material-icons text-center">remove</i></div>
+              <!-- Your address here -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- Back To Top Button -->
+    <a href="#header" id="btp" class="back-to-top btn-floating waves-effect waves-light btn-large custom-btn">
+      <i class="ion-ios-arrow-up"></i>
+    </a>
+
+
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel" style="text-align: center;color: #26a69a;">Message</h4>
+        </div>
+        <div class="modal-body">
+          <textarea #msg class="form-control"  rows="9"  style=" resize: none;" ></textarea>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" style="text-transform: capitalize;background-color: rgb(169, 167, 167);color: #fff;" id="fermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="text-transform: capitalize; background-color: #276ca7;" (click)="send_message(msg.value)">Envoyer</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+

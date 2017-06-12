@@ -1,0 +1,54 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+<div class="wrapper">
+  <div class="container">
+    <div class="left">
+      <div class="top">
+        <input type="text" />
+        <a class="search" ></a>
+      </div>
+      <ul class="people" *ngFor="let m of mess | async; let i = index;">
+
+        <div *ngIf="i==0">
+        <li  *ngIf="m.sid!=currentuser" [routerLink]="['msg',m.$key]" routerLinkActive="active" class="person" #ffgg >
+          <img src="{{(get_name(m.sid) | async)?.avatar }}" alt="" />
+          <span class="name" >{{(get_name(m.sid) | async)?.name | titlecase}}</span>
+          <span class="time">{{ m.date*-1 | date:"dd/MM/yy hh:mm a" }}</span>
+          <span class="preview">{{lm[i]}}</span>
+         <div>{{last_message(m.$key,i)}}</div>
+        </li>
+          <li  *ngIf="m.rid!=currentuser" [routerLink]="['msg',m.$key]" routerLinkActive="active" class="person" #ffgg >
+            <img src="{{(get_name(m.rid) | async)?.avatar }}" alt="" />
+            <span class="name" >{{(get_name(m.rid) | async)?.name | titlecase}}</span>
+            <span class="time">{{ m.date*-1 | date:"dd/MM/yy hh:mm a" }}</span>
+            <span class="preview">{{lm[i]}}</span>
+            <div>{{last_message(m.$key,i)}}</div>
+          </li>
+          <i  class="fa fa-trash" aria-hidden="true" style="cursor: pointer;
+          position: absolute;margin-top: -2.7%;margin-left:19pc;" (click)="delete_conversation(m.$key)"></i>
+        </div>
+        <div *ngIf="i!=0">
+        <li *ngIf="m.sid!=currentuser" [routerLink]="['msg',m.$key]" routerLinkActive="active"   class="person" >
+        <img src="{{(get_name(m.sid) | async)?.avatar }}" alt="" />
+        <span class="name">{{(get_name(m.sid) | async)?.name | titlecase}}</span>
+          <span class="time">{{ m.date*-1 | date:"dd/MM/yy hh:mm a" }}</span>
+          <span class="preview" >{{lm[i]}}</span>
+          <div>{{last_message(m.$key,i)}}</div>
+        </li>
+          <li *ngIf="m.rid!=currentuser" [routerLink]="['msg',m.$key]" routerLinkActive="active"   class="person" >
+            <img src="{{(get_name(m.rid) | async)?.avatar }}" alt="" />
+            <span class="name">{{(get_name(m.rid) | async)?.name | titlecase}}</span>
+            <span class="time">{{ m.date*-1 | date:"dd/MM/yy hh:mm a" }}</span>
+            <span class="preview" >{{lm[i]}}</span>
+            <div>{{last_message(m.$key,i)}}</div>
+          </li>
+        <i  class="fa fa-trash" aria-hidden="true" style="cursor: pointer; position: absolute;margin-top: -2.7%;margin-left: 19pc;" (click)="delete_conversation(m.$key)"></i>
+        </div>
+      </ul>
+    </div>
+
+    <router-outlet></router-outlet>
+
+  </div>
+</div>

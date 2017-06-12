@@ -1,0 +1,292 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/components/modal.css" rel="stylesheet">
+<div style="margin-bottom: 12px;"> </div>
+<md-tab-group >
+  <md-tab >
+    <ng-template md-tab-label>
+      <i class="fa fa-search" aria-hidden="true"></i><span> Rechercher Entreprise</span>
+    </ng-template>
+
+    <div class="listpgWraper">
+      <div class="container">
+
+        <!-- Page Title start -->
+        <div class="pageSearch">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+              <div class="searchform">
+                <div class="row">
+                  <div class="col-md-4 col-sm-3">
+                    <input type="text" class="form-control" #search  [(ngModel)]="keyword" placeholder="Entrez le nom de la page à rechercher" style="    margin-left: -60%;    width: 877px;" />
+                  </div>
+
+                  <div class="col-md-1 col-sm-2">
+                    <button class="btn" style="margin-left: 594%;" [routerLink]="['/entsearch', keyword]"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+              <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of docs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img style="border-radius: 100%;" src={{docc.avatar}} alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{docc.name|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{docc.spec}}</a></div>
+                      <div class="companyName"><p></p></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/ncprofile',docc.$key]">ouvrir</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{docc.desc | truncate :'500'}}</p>
+              </li>
+              <!-- job end -->
+
+              <!-- job start -->
+
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Footer end-->
+
+    <!--Copyright-->
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>
+
+  </md-tab>
+  <md-tab >
+    <ng-template md-tab-label >
+      <i class="fa fa-pencil" aria-hidden="true"></i><span> Crée Entreprise</span>
+    </ng-template>
+    <md-card>
+      <md-input-container style="margin-left: 30%;" >
+        <input mdInput #nom placeholder="Nom" value="" size="63">
+
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left:30%;" class="demo-full-width">
+        <input mdInput #spec placeholder="Spécialiter" value="" size="63">
+      </md-input-container>
+      <br>
+      <br>
+      <md-input-container style="margin-left:30%;" class="demo-full-width">
+        <textarea mdInput #desc placeholder="Déscription" id="descc" rows="7" cols="63" style=" resize: none;"></textarea>
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left: 30%;" >
+        <input mdInput #adr placeholder="Adress" value="" size="63">
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left: 30%;" >
+        <input mdInput #tel placeholder="Tel" value="" size="63">
+      </md-input-container>
+      <br>
+      <md-input-container style="margin-left: 30%;" >
+        <input mdInput #site placeholder="Site Web" value="" size="63">
+      </md-input-container>
+
+      <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-3" style=" margin-left: 6%;
+    width: 16%; cursor: pointer"> <a (click)="create_company(nom.value,spec.value,desc.value,adr.value,tel.value,site.value)" style="margin-top: 20%;background: #00a2ff;
+    color: #fff;
+    padding: 13px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 0;
+    display: block;"><span style="margin-left: 14%;">Crée la page</span></a>
+        </div>
+      </div>
+      <br>
+      <md-progress-bar *ngIf="bufferValuee[0]!=0"
+                       class="example-margin"
+                       #load
+                       [color]="primary"
+                       [mode]="buffer"
+                       [value]="loadd[0]"
+                       [bufferValue]="bufferValuee[0]">
+      </md-progress-bar>
+
+    </md-card>
+  </md-tab>
+
+
+  <md-tab >
+
+    <ng-template md-tab-label  >
+      <div id="my"> <i class="fa fa-building-o" aria-hidden="true"></i><span> Mes Entreprises</span></div>
+    </ng-template>
+    <div class="listpgWraper">
+      <div class="container">
+
+
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+              <div *ngIf="loader2" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <div *ngIf="x[0]==0" style="margin-bottom: 55%;"> <h2 style="color: #27aae1;font-weight: 400; margin-top: 7%;margin-left: -12px;">Vous n'avez aucune page pour le moment</h2></div>
+              <div *ngIf="x[0]==1" style="margin-bottom: 35%;">
+              <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let mdoc of mydocs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img style="border-radius: 100%;" src={{mdoc.avatar}} alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{mdoc.name|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{mdoc.spec}}</a></div>
+                      <div class="companyName"><p></p></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/cprofile',mdoc.$key]" >ouvrir</a></div>
+                    <div  (click)="delete_doc(mdoc.$key)" class="listbtn"><a style="margin-top: 14px; background-color: #f22620; cursor: pointer">Supprimer</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{mdoc.desc | truncate :'500'}}</p>
+              </li>
+              </div>
+              <div *ngIf="x[0]>1" style="margin-bottom: 7%;">
+                <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let mdoc of mydocs | async">
+                  <div class="row">
+                    <div class="col-md-8 col-sm-8">
+                      <div class="jobimg"><img style="border-radius: 100%;" src={{mdoc.avatar}} alt="Job Name" /></div>
+                      <div class="jobinfo">
+                        <h3><a>{{mdoc.name|titlecase}}</a></h3>
+                        <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{mdoc.spec}}</a></div>
+                        <div class="companyName"><p></p></div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                    <div class="col-md-4 col-sm-4">
+                      <div style="margin-top: 14px;" class="listbtn"><a [routerLink]="['/cprofile',mdoc.$key]" >ouvrir</a></div>
+                      <div  (click)="delete_doc(mdoc.$key)" class="listbtn"><a style="margin-top: 14px; background-color: #f22620; cursor: pointer;">Supprimer</a></div>
+                    </div>
+                  </div>
+                  <p style="margin-left: 9px;">{{mdoc.desc | truncate :'500'}}</p>
+                </li>
+              </div>
+              <!-- job start -->
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>
+
+    <!--Footer end-->
+
+    <!--Copyright-->
+
+
+
+  </md-tab>
+</md-tab-group>
+
+<!--modal start-->
+<div *ngFor="let doc of docs | async">
+  <div class="modal fade" id="{{doc.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 33%;color: cadetblue;">Modifier Document</h4>
+        </div>
+        <div class="modal-body">
+
+
+          <div class="form-group">
+
+            <md-input-container style="width: 567px;">
+              <input mdInput #titre2 placeholder="Titre" value="{{doc.titre}}" id="B{{doc.$key}}" size="63">
+
+            </md-input-container>
+          </div>
+          <div class="form-group">
+
+            <md-input-container style="width: 567px;" class="demo-full-width">
+              <textarea mdInput #desc2 placeholder="Déscription" rows="7" cols="63" maxlength="525" style=" resize: none;">{{doc.desc}}</textarea>
+            </md-input-container>
+          </div>
+          <!--<div class="form-group">-->
+          <!--<label  class="control-label" style="font-size: 12px;" >Tags:</label>-->
+          <!---->
+          <!--</div>-->
+          <tag-input [(ngModel)]="items2"  secondaryPlaceholder="Tags"  name="s{{doc.$key}}"></tag-input>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 50%;" (click)="delete_doc(doc.$key,doc.refdata)" >Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="fe{{doc.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="update(titre2.value,desc2.value,doc.$key)" >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

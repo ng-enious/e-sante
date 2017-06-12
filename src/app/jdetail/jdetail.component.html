@@ -1,0 +1,83 @@
+<div *ngFor="let job of jobs | async">
+<div class="container-fluid blue-banner page-title" style="    background: url(https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/bgimage.png?alt=media&token=f3f2266a-5709-4020-956e-75b8916911d8);
+    background-size: cover;">
+  <div class="row section-title">
+    <div class="container main-container">
+      <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <h3 class="white-heading" style="font-size: 30px;">{{job.poste | titlecase}}</h3>
+      </div>
+      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12  pull-right">
+        <div class="favourite"><span style="color: cyan;">Publier le {{ job.date*-1 | date:"dd/MM/yy hh:mm a" }}</span></div>
+      </div>
+    </div>
+  </div>
+  <hr style="color: #9a9a9a">
+  <div class="row dashboard">
+    <div class="container main-container gery-bg">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12  no-padding user-data" style="color: white">
+        <div class="seprator " style="height:62px;width:440px;">
+          <div class="row">
+            <div class="col-md-2" style="padding-left: 0px;"><div class="no-padding user-image"><img style="height: 80px;
+    background-color: white;
+    border-radius: 100%;
+    width: 80px;" src="{{ (get_company(job.cid) | async)?.avatar }}" alt=""/></div></div>
+            <div class="col-md-6" style="margin-left: 12px;">
+              <div class="user-tag" style="width: 60%;height: 68px; ">{{ (get_company(job.cid) | async)?.name }}</div></div>
+            <div class="col-md-3"> <div class="user-tag"><label style="margin-bottom: 4px;color: orange;">Niveau<span style="color: white">{{job.niveau}}</span></label></div></div>
+          </div>
+
+
+        </div>
+        <div class="seprator">
+          <div class="user-tag"><label style="color: orange;">Experience<span style="color: white">{{job.experience}}</span></label></div>
+        </div>
+        <div class="seprator">
+          <div class="user-tag"><label style="color: orange;">Salaire<span style="color: white">{{job.salaire}}</span></label></div>
+        </div>
+        <div class="seprator">
+          <div class="user-tag"><label style="color: orange;">Emplacement<span style="color: white">{{job.loc}}</span></label></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Page Title-->
+
+
+<!-- Job Data -->
+<div class="container-fluid jpd-data white-bg">
+  <div class="row">
+    <div class="container main-container-job">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="content">
+          <h2 style="color: brown;">Déscription:</h2>
+         <p>{{job.description}}</p>
+          <h2 style="color: brown;">Exigence:</h2>
+          <p>
+            {{job.exigence}}
+          </p>
+          <h2 style="color: brown;">Avantage:</h2>
+        <p>{{job.avantage}}</p>
+        </div>
+      </div>
+
+
+
+      <div class="widget w2">
+        <div class="subscribe">
+          <form>
+            <h3>&nbsp;</h3>
+            <div class="form-group">
+
+            </div>
+          </form>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</div>

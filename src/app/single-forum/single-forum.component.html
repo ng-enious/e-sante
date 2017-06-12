@@ -1,0 +1,187 @@
+
+<div id="wrapper">
+
+
+  <div *ngIf="load">
+    <br>
+    <div  class="loader" id="loader-1" style="margin-top: 18%;"></div>
+  </div>
+  <section class="section lb" *ngIf="!load">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+          <aside class="topic-page topic-list blog-list forum-list single-forum">
+            <article class="well btn-group-sm clearfix" style="background-color: white;">
+
+
+              <div class="topic-desc row-fluid clearfix" *ngFor="let pos of post | async">
+                <div class="col-sm-2 text-center publisher-wrap" style="margin-left: -13px;" >
+                  <img src="{{ (get_name(pos.uid) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt=""  style="height: 80px;width: 80px;" class="avatar img-circle img-responsive">
+
+                  <h5>{{ (get_name(pos.uid) | async)?.name |titlecase }}</h5>
+
+                </div>
+                <div class="col-sm-10">
+
+                  <header  *ngIf="pos.etat==1" class="topic-footer clearfix">
+                    <ul class="list-inline tags">
+                      <li class="closed"><a>Attente de réponse</a></li>
+                    </ul>
+                    <!-- end tags -->
+                  </header>
+
+                  <header *ngIf="pos.etat==2"  class="topic-footer clearfix">
+                    <ul class="list-inline tags">
+                      <li class="waiting_answer"><a>Résolu</a></li>
+                    </ul>
+                    <!-- end tags -->
+                  </header>
+                  <!-- end topic get_forum_post(key)-->
+
+                  <h4> <a style="text-transform: capitalize">{{pos.title }}</a></h4>
+                  <div class="blog-meta clearfix">
+
+                    <small>{{ pos.date*-1 | date:"dd/MM/yy hh:mm a" }}</small>
+                    <button  *ngIf="pos.uid==currentuser" type="button" class="btn btn-info bmd-btn-fab" style="margin-left: 73.9%;" data-toggle="modal" data-target="#LoginModal">
+                      <i class="material-icons">edit</i>
+                    </button>
+                  </div>
+
+                  <p>{{pos.desc}}</p>
+
+
+                </div>
+                <div id="LoginModal" class="modal fade" role="dialog">
+                  <div class="modal-dialog modal-sm">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 200%;left: -58%;">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="text-align: center;color: cadetblue;">Modifier la Publication</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="widget clearfix">
+                          <div class="panel panel-primary">
+                            <div class="panel-body">
+                              <form class="sidebar-login">
+                                <div class="form-group">
+                                  <label for="textArea" class="col-md-2 control-label" style="margin-left: -3%;">Titre</label>
+                                  <textarea #titl class="form-control" rows="1" >{{pos.title}}</textarea>
+                                </div>
+                                <div class="form-group" style="margin-top: 8%;">
+                                  <label for="textArea" class="col-md-2 control-label" style="margin-left: -3%;">Déscription</label>
+                                  <textarea #desc class="form-control" rows="6" >{{pos.desc}}</textarea>
+                                </div>
+                                <div class="form-group" style="margin-top: 8%;">
+                                  <label for="textArea" class="col-md-2 control-label" style="margin-left: -3%;">Etat</label>
+                                  <select #sel class="form-control">
+                                    <option value="1">Attente de réponse</option>
+                                    <option value="2">Résolu</option>
+                                  </select>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div><!-- end widget -->
+                      </div>
+                      <div class="modal-footer" style="height: 43px;">
+                        <button type="button" class="btn btn-raised btn-danger gr " (click)="delete_all_post(pos.$key)" data-dismiss="modal" style="left: -41%;" >Supprimer</button>
+                        <button type="button" class="btn btn-raised btn-info gr " style="margin-bottom: 0%;margin-right: 3%;" data-dismiss="modal" id="cl">Fermer</button>
+                        <button type="button" class="btn btn-primary gr"  style="margin-bottom: 0%;margin-right: 3%;" (click)="updatedata(titl.value,desc.value,pos.$key,sel.value)" style="margin-bottom: 0px; background-color: #0fb2fc;color: white;">Enregister</button>
+                        <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end tpic-desc -->
+
+
+
+              <div class="topic-desc row-fluid clearfix" *ngFor="let rep of reply | async">
+                <div class="col-sm-2 text-center publisher-wrap" style="margin-left: -13px;">
+                  <img src="{{ (get_name(rep.uid) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt=""  style="height: 80px;width: 80px;" class="avatar img-circle img-responsive">
+                  <h5>{{ (get_name(rep.uid) | async)?.name | titlecase}}</h5>
+
+                </div>
+                <div class="col-sm-10">
+
+
+                  <!-- end topic -->
+
+
+                  <div class="blog-meta clearfix">
+
+                    <small>{{ rep.date*-1 | date:"dd/MM/yy hh:mm a" }}</small>
+                    <button *ngIf="rep.uid==currentuser" type="button" class="btn btn-info bmd-btn-fab" style="margin-left: 73.9%;" data-toggle="modal" [attr.data-target]="'#'+rep.$key">
+                      <i class="material-icons">edit</i>
+                    </button>
+                  </div>
+
+
+                  <p>{{rep.content}}</p>
+
+
+                </div>
+                <div id="{{rep.$key}}" class="modal fade" role="dialog">
+                  <div class="modal-dialog modal-sm">
+                    <!-- Modal content-->
+                    <div class="modal-content" style="width: 200%;left: -58%;">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" style="text-align: center;color: cadetblue;">Modifier la Publication</h4>
+                      </div>
+                      <div class="modal-body">
+                        <div class="widget clearfix">
+                          <div class="panel panel-primary">
+                            <div class="panel-body">
+                              <form class="sidebar-login">
+                                <div class="form-group" style="margin-top: 8%;">
+                                  <label for="textArea" class="col-md-2 control-label" style="margin-left: -3%;">Déscription</label>
+                                  <textarea #desc2 class="form-control" rows="6" >{{rep.content}}</textarea>
+                                </div>
+                              </form>
+                            </div>
+                          </div>
+                        </div><!-- end widget -->
+                      </div>
+                      <div class="modal-footer" style="height: 43px;">
+                        <button type="button" class="btn btn-raised btn-danger gr " (click)="delete_post(rep.$key)" data-dismiss="modal" style="left: -41%;" >Supprimer</button>
+                        <button type="button" class="btn btn-raised btn-info gr " style="margin-bottom: 0%;margin-right: 3%;" data-dismiss="modal" id="cl{{rep.$key}}">Fermer</button>
+                        <button type="button" class="btn btn-primary gr"  style="margin-bottom: 0%;margin-right: 3%;" (click)="updatedata2(desc2.value,rep.$key)" style="margin-bottom: 0px; background-color: #0fb2fc;color: white;">Enregister</button>
+                      <br>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div><!-- end tpic-desc -->
+
+
+              <div id="reply" class="forum-answer topic-desc clearfix">
+                <div class="row">
+                  <div class="col-sm-2 text-center publisher-wrap">
+                    <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" style="height: 80px;width: 80px;" alt="" class="avatar img-circle img-responsive">
+                    <h5>{{ (get_name(currentuser) | async)?.name | titlecase }}</h5>
+
+                  </div>
+
+                  <div class="col-md-10">
+                    <div class="form-group">
+                      <label for="textArea" class="col-md-2 control-label">Reply</label>
+                      <div class="col-md-10">
+                        <textarea class="form-control" rows="3" id="textArea" #txt></textarea>
+                        <a class="btn btn-raised btn-info gr" (click)="comment_post(txt.value)">Reply</a>
+                      </div>
+                    </div>
+                  </div><!-- end col -->
+                </div><!-- end row -->
+              </div><!-- end answer -->
+
+
+            </article>
+
+          </aside>
+        </div><!-- end col -->
+      </div><!-- end row -->
+    </div><!-- end container -->
+  </section><!-- end section -->
+</div>

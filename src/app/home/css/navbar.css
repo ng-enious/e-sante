@@ -1,0 +1,90 @@
+.navbar-default .navbar-collapse, .navbar-default .navbar-form{
+  border: 0;
+ margin-right: 25px;
+}
+
+.container-fluid>.navbar-collapse, .container-fluid>.navbar-header, .container>.navbar-collapse, .container>.navbar-header {
+    margin-right: 0;
+    margin-left: -140px;
+}
+.timeline-cover .navbar-mobile .profile-info img.profile-photo{
+  border: 10px solid #fff;
+  border-radius: 50%;
+  height: 200px;
+  margin: auto;
+  width: 200px;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul{
+  margin: 0 0 20px;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul li{
+  padding-left: 10px;
+  padding-right: 10px;
+  position: relative;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul li::after{
+  content: "";
+  height: 20px;
+  background: none;
+  border-right: 1px solid #f1f2f2;
+  position: absolute;
+  right: 0;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul li:nth-child(4)::after{
+  content: none;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul li a{
+  color: #4d4d4d;
+}
+
+.timeline-cover .navbar-mobile .mobile-menu ul li a.active{
+  color: #27aae1;
+}
+@media only screen and (max-width : 768px) {
+
+  .menu ul.main-menu li.dropdown ul.dropdown-menu li{background: #282425;}
+  
+  #header-inverse nav.menu .navbar-collapse{background: rgba(0,0,0, 0.9);}
+
+  .sign-up-form{left: 0; right: 0; margin: auto;}
+
+  section h1.section-title{font-size: 90px !important; margin-bottom: 0 !important;}
+  
+  #features .feature-item{margin-bottom: 20px;}
+
+  #site-facts .circle{width: 100%; border-radius: 1000px;}
+
+  .nearby-user{text-align: center;}
+
+  .nearby-user button.btn-primary{float: none !important;}
+
+  .post-content .post-container .post-detail .reaction{position: relative;}
+
+  #footer .footer-wrapper ul{margin-bottom: 20px;}
+
+  .contact-us .col-sm-7{margin-bottom: 20px !important;}
+  
+  .intro-texts{transform: translateY(0); margin-bottom: 80px; text-align: center;}
+  
+  .reg-form-container{padding: 30px !important; text-align: center;}
+  
+  .reg-form-container .reg-options::before{background: linear-gradient(to bottom, rgba(255,255,255, 0.2) , rgba(255,255,255, 0.05)); height: 50px; width: 70%; left: 0; right: 0; margin: auto; top: -50px; transform: translateX(0) translateY(0);border-radius: 6px 6px 0 0;}
+  
+  .reg-form-container .reg-options .nav-tabs{left: 50%; transform: translateY(0) translateX(-50%) rotate(0); top: -40px;}
+  
+  .reg-form-container .reg-options .nav-tabs li{margin: 0;}
+  
+  .reg-form-container .reg-options .nav-tabs li:after{right: 0;}
+  
+  .reg-form-container::before{content: none;}
+  
+  .reg-form-container::after{content: none;}
+  
+  .reg-form-container .nav-tabs > li > a{padding-left: 10px; padding-right: 10px; min-width: 50px;}
+
+}

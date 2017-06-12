@@ -1,0 +1,123 @@
+
+<link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+<link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+<div *ngIf="isLoggedIn" class="nbar">
+  <nav class="navbar navbar-default navbar-fixed-top menu">
+    <div class="container">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" [routerLink]="['']" ><img src="./src/app/logo.png" alt="logo" style="
+    margin-left: 4pc;
+"/></a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav navbar-right main-menu">
+          <li class="dropdown">
+            <a [routerLink]="['']" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-home"></i> Accueil </a>
+
+          </li>
+          <li class="dropdown">
+            <a [routerLink]="['/profile']" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user"></i> &nbsp;Profil</a>
+          </li>
+          <li class="dropdown">
+            <a [routerLink]="['/message']"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-comments"></i> &nbsp;Messagerie</a>
+          </li>
+          <li class="dropdown">
+            <a [routerLink]="['/jdetail']"class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-bell"></i>&nbsp; Notification</a>
+          </li>
+          <li class="dropdown">
+            <a [routerLink]="['/job']"  class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-briefcase"></i> &nbsp;Offres d'emploi</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-th-list" aria-hidden="true"></i>&nbsp; Plus <i class="fa fa-angle-down"></i></a>
+            <ul class="dropdown-menu page-list" >
+              <li>
+                <a class="active" [routerLink]="['/forum']">
+                  <i class="fa fa-users" aria-hidden="true"></i> &nbsp;Forum
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/amie']">
+                  <i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp; Amis
+                </a>
+              </li>
+
+              <li>
+                <a href="#">
+                  <i class="fa fa-calendar" aria-hidden="true"></i> &nbsp; Evenement
+                </a>
+              </li>
+
+              <li>
+                <a [routerLink]="['/doc']">
+                  <i class="fa fa-file-text" aria-hidden="true"></i> &nbsp; Document
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/entreprise']" >
+                  <i class="fa fa-hospital-o" aria-hidden="true"></i> &nbsp; Entreprise
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> &nbsp;Compte <b><i class="fa fa-angle-down"></i></b></a>
+            <ul class="dropdown-menu page-list" >
+              <li>
+                <a [routerLink]="['/pwreset']"> <i class="fa fa-lock"></i> &nbsp;
+                  Changer le mot de passe</a>
+              </li>
+              <li>
+                <a [routerLink]="['/disable']"><i class="fa fa-times-circle" aria-hidden="true"></i> &nbsp;
+                  Supprimer le compte</a>
+              </li>
+
+              <li>
+                <a (click)="logout()" style="cursor: pointer"><i class="fa fa-sign-out" aria-hidden="true"></i> &nbsp;Déconnexion</a>
+              </li>
+
+
+
+            </ul>
+          </li>
+        </ul>
+        <form class="navbar-form navbar-right hidden-sm">
+          <div class="form-group">
+            <i class="icon ion-android-search"></i>
+            <input #tx (keyup)="refreshData(tx.value)" (blur)="unfocus()"  (focus)="isfocus()" type="text" class="form-control" placeholder="Rechercher des amis...">
+              <ul *ngIf="destinations.length>0 && focused " style="left: 2px;" class="dropdown-menu page-list show" >
+                  <!--<hr *ngIf="i>0" style="margin-bottom: 4px;">-->
+                <li  *ngFor="let hero of destinations ; let i = index;"   >
+
+                  <a *ngIf="hero.key!=currentuser"  (click)="cliks()" [routerLink]="['/pvisitor',hero.key]"style="width: 231px;height: 42px; padding-left: 3px; cursor: pointer">  <img src="{{hero.avatar}}" style="width: 36px;border-radius: 100%; height: 35px;margin-left: 3px;">  {{hero.name | titlecase}}</a>
+                  <a *ngIf="hero.key==currentuser" (click)="cliks()" [routerLink]="['/profile']"style="width: 231px;height: 42px; padding-left: 3px; cursor: pointer">  <img src="{{hero.avatar}}" style="width: 36px;border-radius: 100%; height: 35px;margin-left: 3px;">  {{hero.name | titlecase}}</a>
+                </li>
+
+
+
+
+
+              </ul>
+
+
+          </div>
+        </form>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+</div>
+
+
+<div class="app-content" style="padding-top: 51px;">
+ <router-outlet></router-outlet>
+</div>
+

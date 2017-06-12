@@ -1,0 +1,123 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="home">
+  <link rel='stylesheet prefetch' href='https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css'>
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/muicss/0.9.16/css/mui.min.css">
+  <div id="page-contents" style="padding: 30px 0 29.1%;">
+    <div class="container-fluid">
+      <div class="row">
+
+        <!-- Newsfeed Common Side Bar Left
+        ================================================= -->
+        <div class="fixed col-md-3 ">
+          <div id="chat-block2">
+            <div class="profile-card">
+              <img src="{{ (get_name(currentuser) | async)?.avatar }}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="user" class="profile-photo" />
+              <h5><a [routerLink]="['/profile']" class="text-white">{{ (get_name(currentuser) | async)?.name | titlecase }}</a></h5>
+              <a class="text-white"><i class="ion ion-android-person-add"></i> {{nb_amie[0]}} Amis</a>
+            </div><!--profile card ends-->
+            <div class="left-content">
+              <ul class="nav-news-feed">
+                <li><i class="icon ion-android-contacts"></i><div><a [routerLink]="['/forum']">Forum</a></div></li>
+                <li><i class="icon ion-ios-people"></i><div><a>Amis</a></div></li>
+                <li><i class="icon ion-android-calendar"></i><div><a >Évènement</a></div></li>
+                <li><i class="icon ion-images"></i><div><a [routerLink]="['/doc']">Document</a></div></li>
+                <li><i class="fa fa-hospital-o" ></i><div><a [routerLink]="['/entreprise']">Entreprise</a></div></li>
+              </ul><!--news-feed links ends-->
+            </div>
+          </div>
+
+        </div>
+        <div class="col-md-6" style="        left: 24.7%;">
+          <ul class="mui-tabs__bar mui-tabs__bar--justified" style="background-color: white;
+    margin-bottom: 21px;">
+            <li class="mui--is-active"><a data-mui-toggle="tab" data-mui-controls="pane-justified-1" style="text-transform: capitalize; cursor: pointer">Amis <span *ngIf="nb_amie[0]>0" class="badge">{{nb_amie[0]}}</span></a></li>
+            <li><a data-mui-toggle="tab" style="text-transform: capitalize; cursor: pointer" data-mui-controls="pane-justified-2">Invitations <span *ngIf="nb_invit[0]>0" class="badge">{{nb_invit[0]}}</span></a></li>
+          </ul>
+          <div class="mui-tabs__pane mui--is-active" id="pane-justified-1">    <div class="friend-list">
+            <div class="row">
+              <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <div *ngIf="nb_amie[0]==0"><h2 style="margin-left: 128px;
+    margin-bottom: 9%;">vous n'avez aucun amie pour le moment</h2> </div>
+              <div *ngFor="let ami of friends | async" class="col-md-6 col-sm-6">
+                <div class="friend-card">
+                  <div class="friend-content">
+                    <img src="{{(get_name(ami.uid) | async)?.cover}}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/cover.jpg?alt=media&token=7a6ddfdb-985d-444a-9876-127b68a1e484" alt="profile-cover" class="img-responsive cover"                                style="height: 129px;" />
+                    <div class="card-info">
+                      <img src="{{(get_name(ami.uid) | async)?.avatar}}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" alt="user" class="profile-photo-lg" />
+                      <div class="friend-info">
+                        <button class=" pull-right mui-btn mui-btn--raised mui-btn--danger" style="padding-right: 10px;
+                              padding-left: 10px;
+                              margin-top: 7px;color: white;text-transform: capitalize;" (click)="delete_friend(ami.uid)" >retirer</button>
+
+                        <h5><a [routerLink]="['/pvisitor',ami.uid]" class="profile-link" style="margin-left: 0px;">
+                          {{(get_name(ami.uid) | async)?.name | titlecase}}</a></h5>
+                        <p>{{(get_name(ami.uid) | async)?.poste | titlecase}}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div></div>
+
+          <div class="mui-tabs__pane" id="pane-justified-2">
+            <div *ngIf="nb_invit[0]==0"><h2 style= "margin-left: 88px; margin-bottom: 8%;margin-top: 3pc;">vous n'avez aucune invitation pour le moment</h2></div>
+            <div *ngFor="let inv of requests | async" class="friend-request">
+              <div class="row">
+                <div class="col-md-2">     <img style="    height: 60px; width: 60px;border-radius: 100%;margin-top: 13px;margin-left: 11px;"src="{{(get_name(inv.uid) | async)?.avatar}}">
+                </div>
+                <div class="col-md-3"> <h5 style="margin-left: -26px;margin-top: 30px;"><a [routerLink]="['/pvisitor',inv.uid]" class="profile-link" style="margin-left: 0px;">{{(get_name(inv.uid) | async)?.name | titlecase}}</a></h5></div>
+                <div class="col-md-7" style="margin-top: 20px;">
+                  <button class=" pull-right mui-btn mui-btn--raised mui-btn--danger" style="margin-left: 4%;margin-right: 6%;text-transform: capitalize;" (click)="delete_request(inv.uid)">Supprimer</button>
+                  <button class=" pull-right mui-btn mui-btn--raised mui-btn--primary" style="text-transform: capitalize;
+    background-color: #1aca30;" (click)="accept_friend(inv.uid)">Accepter</button>
+
+                </div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+
+
+
+        </div>
+
+        <!-- Newsfeed Common Side Bar Right
+        ================================================= -->
+        <div class="fixed col-md-2" style="left: 74.5%;">
+          <div class="right-content" id="sticky-sidebar">
+            <div class="suggestions" >
+              <br>
+              <h4 style="text-align: center" class="grey">Sponsored</h4>
+              <div class="friend-card">
+                <img style="border: 0.1px solid rgba(51, 51, 51, 0.19);" src="./src/app/1.jpg" alt="profile-cover" class="img-responsive cover" />
+                <div class="card-info">
+                  <div class="friend-info">
+                    <h5><a  class="profile-link" style="margin-left: 14%">Doctor of Occupational Therapy</a></h5>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisc ing elit, sed do eiusmod tempor incididunt ut labore dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer
+  ================================================= -->
+  <footer id="footer" *ngIf="footer">
+
+    <div class="copyright">
+      <p> © 2017</p>
+    </div>
+  </footer>
+</div>

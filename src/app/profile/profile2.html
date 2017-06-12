@@ -1,0 +1,1080 @@
+
+<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div *ngIf="loader" class="loader" id="loader-1" style="    margin-top: 20%;"> </div>
+<div *ngIf="!loader">
+<div class="profile">
+
+  <!--==========================================
+                   HEADER
+  ===========================================-->
+  <div class="row">
+    <div class="col-md-12" style="
+    padding-left: 0px;
+    padding-right: 0px;
+">
+  <div *ngFor="let cov of user | async"  id="header" class="shadow" style="overflow: hidden">
+    <!-- Navigation -->
+
+
+    <!-- Name and Status -->
+    <div  *ngIf="charg[0]==true" id="intro" class="container" style="margin-bottom: 24%">
+      <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" left:106%; margin-bottom: -8%;" data-toggle="modal" data-target="#cover">
+        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+      </a>
+      <div>
+        <div class="blob blob-0"></div>
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
+        <div class="blob blob-5"></div>
+      </div>
+
+    </div>
+    <div  *ngIf="charg[0]!=true" id="intro" class="container"  >
+      <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" left:106%; margin-bottom: -8%;" data-toggle="modal" data-target="#cover">
+        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+      </a>
+      <img class="background" src="{{cov.cover}}" default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/cover.jpg?alt=media&token=7a6ddfdb-985d-444a-9876-127b68a1e484" style="z-index: 1;margin-left: -17%;margin-top: -2%;" >
+
+
+    </div>
+    </div>
+
+  </div>
+
+  <!--==========================================
+                 ABOUT
+  ===========================================-->
+  <section id="about" class="section">
+    <div class="container">
+      <div class="row">
+        <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+
+          <!-- Profile Picture [Square] -->
+          <div  *ngFor="let ava of user | async" class="contain">
+          <div id="profile" class="center-block">
+            <img src="{{ava.avatar}}"  default="https://firebasestorage.googleapis.com/v0/b/sofiane-5a3d8.appspot.com/o/user.png?alt=media&token=a577b7b6-02bb-4515-bc85-7743403854bd" style="
+    z-index: 2;
+    margin-bottom: -6pc;
+">
+            <div class="overlay2"></div>
+            <div class="buttonav"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="right: 32%;bottom: 6.3pc;" data-toggle="modal" data-target="#avatar">
+              <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+            </a></div>
+
+          </div>
+          </div>
+        </div>
+      </div>
+          <div class="row">
+            <!-- Download & Contact Button -->
+            <div class="col col-xs-12 col-sm-12 col-md-12 text-center">
+          <!-- Social Links -->
+          <div id="intro-div" class="card content-wrapper">
+
+            <a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style=" right: -42%;     margin-bottom: -2%;    top: 10px;" data-toggle="modal" data-target="#data">
+              <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+            </a>
+            <div *ngFor="let users of user | async">
+            <ul class="text-center list-inline">
+
+              <div style="font-size: 1.7em;"> {{users.name | titlecase}}<br> {{users.poste | titlecase}}<br> {{users.address | titlecase}}
+              </div>
+            </ul>
+
+            <!-- Some Intro About You -->
+            <p class="text-center">
+              {{users.about}}
+
+
+            </p>
+
+            </div>
+
+
+                <!-- Your CV File -->
+                <a [routerLink]="['/mypost']" class="btn waves-effect waves-light btn-primary custom-btn" style=" text-transform: capitalize;">mes activité</a>
+              </div>
+            </div>
+
+          </div>
+
+    </div>
+  </section>
+
+  <!--==========================================
+                     EXPERIENCE
+  ===========================================-->
+  <section id="experience" class="section">
+    <div>
+      <h4 class="text-uppercase text-center">Experience
+        <a href="#!" class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible " style="    margin-bottom: 3px;" data-toggle="modal" data-target="#experience2" >
+          <i class="material-icons">add</i>
+        </a>
+      </h4>
+
+
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+
+          <!-- Timeline -->
+          <div class="timeline center-block">
+
+            <ul>
+
+              <li *ngFor="let exp of experiences | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                <i class="title-icon fa fa-circle"></i>
+                <div class="timeline-content">
+
+                  <!-- Heading -->
+                  <div class="timeline-header">
+                    <div class="row" style="    margin-bottom: 2px;">
+
+                      <div class="col-md-10"><h3 class="text-capitalize">{{exp.Poste | titlecase}}</h3></div>
+                      <div class="col-md-2"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="top: 10px;" data-toggle="modal" [attr.data-target]="'#' + exp.$key">
+                        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                      </a>      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Organization and Period -->
+                  <p class="sub-heading">{{exp.Organisation  | titlecase}}</p>
+                  <p class="sub-heading">{{exp.Dated | date:'d MMMM yyyy'}} - {{exp.Datef | date:'d MMMM yyyy'}}</p>
+
+                  <!-- Job Summary -->
+                  <p class="content-p">
+                    {{exp.about}}
+                  </p>
+                </div>
+              </li>
+
+
+
+
+
+
+
+
+            </ul>
+          </div>
+          <!-- End of Timeline -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!--==========================================
+                     EDUCATION
+  ===========================================-->
+  <section id="education" class="section">
+    <h4 class="text-uppercase text-center">Formations           <a href="#!" class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible " style="    margin-bottom: 3px;" data-toggle="modal" data-target="#education2">
+      <i class="material-icons">add</i>
+    </a></h4>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+
+          <!-- Timeline -->
+          <div class="timeline center-block">
+            <ul>
+              <li  *ngFor="let fo of formation | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                <i class="title-icon fa fa-circle"></i>
+                <div class="timeline-content">
+
+                  <!-- Heading -->
+                  <div class="timeline-header">
+                    <div class="row" style="    margin-bottom: 2px;">
+
+                      <div class="col-md-10"><h3 class="text-capitalize">{{fo.diplom  | titlecase}}</h3></div>
+                      <div class="col-md-2"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="    top: 10px;" data-toggle="modal" [attr.data-target]="'#' + fo.$key">
+                        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                      </a>      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Institution, Period & result -->
+                  <p class="sub-heading">{{fo.fac  | titlecase}}</p>
+                  <p class="sub-heading">{{fo.Dated | date:'d MMMM yyyy'}} - {{fo.Datef | date:'d MMMM yyyy'}}</p>
+
+
+                  <!-- Education Summary -->
+                  <p class="content-p">
+                 {{fo.about}}
+                  </p>
+                </div>
+              </li>
+
+
+            </ul>
+          </div>
+          <!-- End of Timeline -->
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!--==========================================
+                 CERTIFICATION
+  ===========================================-->
+  <section id="certification" class="section">
+    <h4 class="text-uppercase text-center">Certification  <a href="#!" class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible " style="    margin-bottom: 3px;"  data-toggle="modal" data-target="#certification2">
+      <i class="material-icons">add</i>
+    </a></h4>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+
+          <!-- Timeline -->
+          <div class="timeline center-block">
+            <ul>
+              <li *ngFor="let cer of certification | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                <i class="title-icon fa fa-circle"></i>
+                <div class="timeline-content">
+
+                  <!-- Heading -->
+                  <div class="timeline-header">
+                    <div class="row" style="    margin-bottom: 2px;">
+
+                      <div class="col-md-10"><h3 class="text-capitalize">{{cer.titre  | titlecase}}</h3></div>
+                      <div class="col-md-2"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="    top: 10px;"  data-toggle="modal" [attr.data-target]="'#' + cer.$key">
+                        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                      </a>      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Institution, Period & result -->
+                  <p class="sub-heading">{{cer.autority  | titlecase}}</p>
+                  <p class="sub-heading">{{cer.Date | date:'d MMMM yyyy'}}</p>
+
+
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <!-- End of Timeline -->
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!--==========================================
+                 Organisation
+  ===========================================-->
+  <section id="Organisation" class="section">
+    <h4 class="text-uppercase text-center">Organisation  <a href="#!" class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible " style="    margin-bottom: 3px;" data-toggle="modal" data-target="#organisation2">
+      <i class="material-icons">add</i>
+    </a></h4>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+
+          <!-- Timeline -->
+          <div class="timeline center-block">
+            <ul>
+              <li *ngFor="let exps of organisation | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                <i class="title-icon fa fa-circle"></i>
+                <div class="timeline-content">
+
+                  <!-- Heading -->
+                  <div class="timeline-header">
+                    <div class="row" style="    margin-bottom: 2px;">
+
+                      <div class="col-md-10"><h3 class="text-capitalize">{{exps.Poste  | titlecase}}</h3></div>
+                      <div class="col-md-2"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="top: 10px;" data-toggle="modal" [attr.data-target]="'#' + exps.$key">
+                        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                      </a>      </div>
+
+                    </div>
+                  </div>
+
+                  <!-- Organization and Period -->
+                  <p class="sub-heading">{{exps.Organisation  | titlecase}}</p>
+                  <p class="sub-heading">{{exps.Dated | date:'d MMMM yyyy'}} - {{exps.Datef | date:'d MMMM yyyy'}}</p>
+
+                  <!-- Job Summary -->
+                  <p class="content-p">
+                    {{exps.about}}
+                  </p>
+                </div>
+              </li>
+
+
+
+            </ul>
+          </div>
+          <!-- End of Timeline -->
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+  <!--==========================================
+                   LAngue
+  ===========================================-->
+  <section id="langue" class="section">
+    <h4 class="text-uppercase text-center">Langue  <a href="#!" class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible " style="    margin-bottom: 3px;" data-toggle="modal" data-target="#Langued2">
+      <i class="material-icons">add</i>
+    </a></h4>
+    <div class="container">
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+
+          <!-- Timeline -->
+          <div class="timeline center-block">
+            <ul>
+              <li  *ngFor="let ln of langue | async" class="card" data-aos="fade-up" data-aos-duration="1200">
+                <i class="title-icon fa fa-circle"></i>
+                <div class="timeline-content">
+
+                  <!-- Heading -->
+                  <div class="timeline-header">
+                    <div class="row" style="    margin-bottom: 2px;">
+
+                      <div class="col-md-10"><h3 class="text-capitalize">{{ln.langue  | titlecase}}</h3></div>
+                      <div class="col-md-2"><a class="btn-floating waves-effect waves-light btn-sm custom-btn back-to-top-is-visible" style="    top: 10px;"  data-toggle="modal" [attr.data-target]="'#' + ln.$key">
+                        <i class="large material-icons" style="left: 0.25%; top: 0px; color:white;">mode_edit</i>
+                      </a>      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <!-- End of Timeline -->
+        </div>
+      </div>
+    </div>
+
+
+  </section>
+
+
+
+
+
+  <!--==========================================
+              CONTACT
+  ===========================================-->
+  <section id="contact" class="section" style="display: none;">
+
+    <div class="container">
+
+
+      <!-- Location MAP -->
+      <div class="row">
+        <div class="col col-md-12 col-sm-12 col-xs-12">
+          <div id="google-map" data-aos="zoom-in" data-aos-delay="0" data-aos-offset="0">
+            <div id="map-container"></div>
+            <div id="cd-zoom-in" class="custom-btn"><i class="material-icons text-center">add</i></div>
+            <div id="cd-zoom-out" class="custom-btn"><i class="material-icons text-center">remove</i></div>
+            <!-- Your address here -->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Back To Top Button -->
+  <a href="#header" id="btp" class="back-to-top btn-floating waves-effect waves-light btn-large custom-btn">
+    <i class="ion-ios-arrow-up"></i>
+  </a>
+
+
+</div>
+  <!-- modale name , poste , about , adress  -->
+<div class="modal fade" id="data" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="exampleModalLabel" style="margin-left: 21%;color: cadetblue;">Modifier vos Données</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+
+          <div class="form-group">
+            <label for="recipient-name" class="control-label" style="font-size: 12px;">Nom/Prenom:</label>
+
+
+
+            <input #name type="text" class="form-control" id="recipient-name" style="font-size: 20px;" value="{{users.name}}">
+              </div>
+
+          <div class="form-group">
+            <label for="recipient-name" class="control-label" style="font-size: 12px;">Poste:</label>
+            <input #post type="text" class="form-control" id="recipient-nam" style="font-size: 20px;" value="{{users.poste}}">
+          </div>
+          <div class="form-group">
+            <label for="recipient-name" class="control-label" style="font-size: 12px;">Adresse:</label>
+            <input  #adr type="text" class="form-control" id="recipient-n" style="font-size: 20px;" value="{{users.address}}">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="control-label" style="font-size: 12px;">About:</label>
+            <textarea #about class="form-control" id="message-text" rows="7"  style=" resize: none;" >{{users.about}}</textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="gfermer">Fermer</button>
+        <button type="button" class="btn btn-primary" style="margin-right: 25%;" (click)="updatedata(name.value,post.value,adr.value,about.value)"  >Enregistrer</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. modale name , poste , about , adress  -->
+<!-- modale experiences -->
+<div class="modal fade" id="experience2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel2" style="margin-left: 21%;color: cadetblue;">Ajouter une Experience</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Poste occuper :</label>
+              <input #post type="text" class="form-control" id="poste" style="font-size: 20px;" required>
+
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Entreprise:</label>
+              <input #org type="text" class="form-control" id="org" style="font-size: 20px;" required >
+
+            </div>
+            <div class="form-group" >
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" required>
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">About:</label>
+              <textarea #about class="form-control" id="message-text2" rows="5"  style=" resize: none;" required ></textarea>
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="efermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 25%;"   (click)="experience_push(post.value,org.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. experiences  -->
+
+
+<!-- modale experiences child -->
+<div *ngFor="let exp of experiences | async">
+<div class="modal fade" id="{{exp.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Modifier Experience</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Poste occuper :</label>
+
+
+
+              <input #post type="text" class="form-control"  style="font-size: 20px;"  value="{{exp.Poste}}">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;" >Entreprise:</label>
+              <input #org type="text" class="form-control"  style="font-size: 20px;"  value="{{exp.Organisation}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" value="{{exp.Dated}}">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" value="{{exp.Datef}}">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">About:</label>
+              <textarea #about class="form-control"  rows="5"  style=" resize: none;" >{{exp.about}}</textarea>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 22%;" (click)="experience_child_delete(exp.$key)">Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="F{{exp.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="experience_child_update(exp.$key,post.value,org.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+    </div>
+  </div>
+</div>
+</div>
+<!--  end .. experiences child  -->
+
+<!-- modale education -->
+<div class="modal fade" id="education2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="exampleModalLabel3" style="margin-left: 21%;color: cadetblue;">Ajouter une Formation</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Diplome :</label>
+              <input #diplom type="text" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Faculté/Ecole:</label>
+              <input #fac type="text" class="form-control"  style="font-size: 20px;" required >
+
+            </div>
+            <div class="form-group" >
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" required>
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">Déscription:</label>
+              <textarea #about class="form-control"  rows="5"  style=" resize: none;" required ></textarea>
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="edfermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 25%;"   (click)="formation_push(diplom.value,fac.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. education  -->
+
+
+<!-- modale education child -->
+<div *ngFor="let fo of formation | async">
+  <div class="modal fade" id="{{fo.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Modifier Formation</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Diplome :</label>
+
+
+
+              <input #dip type="text" class="form-control"  style="font-size: 20px;"  value="{{fo.diplom}}">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;" >Faculté/Ecole:</label>
+              <input #fac type="text" class="form-control"  style="font-size: 20px;"  value="{{fo.fac}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" value="{{fo.Dated}}">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" value="{{fo.Datef}}">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">Déscription:</label>
+              <textarea #about class="form-control"  rows="5"  style=" resize: none;" >{{fo.about}}</textarea>
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 22%;" (click)="formation_child_delete(fo.$key)">Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="F{{fo.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="formation_child_update(fo.$key,dip.value,fac.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. education child  -->
+
+
+<!-- modale certification -->
+<div class="modal fade" id="certification2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Ajouter une Certification</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Nom :</label>
+              <input #cer type="text" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Autorité:</label>
+              <input #auto type="text" class="form-control"  style="font-size: 20px;" required >
+
+            </div>
+            <div class="form-group" >
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Date:</label>
+              <input  #date type="date" class="form-control"  style="font-size: 20px;" required>
+
+
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="cefermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 25%;"   (click)="certification_push(cer.value,auto.value,date.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. certification  -->
+
+
+<!-- modale certification child -->
+<div *ngFor="let cert of certification | async">
+  <div class="modal fade" id="{{cert.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Modifier Certification</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Nom :</label>
+
+
+
+              <input #certifi type="text" class="form-control"  style="font-size: 20px;"  value="{{cert.titre}}">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;" >Autorité:</label>
+              <input #autor type="text" class="form-control"  style="font-size: 20px;"  value="{{cert.autority}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Date d'obtention:</label>
+              <input  #datev type="date" class="form-control"  style="font-size: 20px;" value="{{cert.Date}}">
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 22%;" (click)="certification_child_delete(cert.$key)">Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="C{{cert.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="certification_child_update(cert.$key,certifi.value,autor.value,datev.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. certification child  -->
+
+
+
+<!-- modale organisation -->
+<div class="modal fade" id="organisation2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Ajouter une Organisation</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Poste occuper :</label>
+              <input #post type="text" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Organisation:</label>
+              <input #org type="text" class="form-control"  style="font-size: 20px;" required >
+
+            </div>
+            <div class="form-group" >
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" required>
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" required>
+
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">About:</label>
+              <textarea #about class="form-control"  rows="5"  style=" resize: none;" required ></textarea>
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="ofermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 25%;"   (click)="organisation_push(post.value,org.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. experiences  -->
+
+
+<!-- modale experiences child -->
+<div *ngFor="let exps of organisation | async">
+  <div class="modal fade" id="{{exps.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Modifier Organisation</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Poste occuper :</label>
+
+
+
+              <input #post type="text" class="form-control"  style="font-size: 20px;"  value="{{exps.Poste}}">
+            </div>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;" >Organisation:</label>
+              <input #org type="text" class="form-control"  style="font-size: 20px;"  value="{{exps.Organisation}}">
+            </div>
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">De:</label>
+              <input  #dated type="date" class="form-control"  style="font-size: 20px;" value="{{exps.Dated}}">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">À:</label>
+              <input  #datef type="date" class="form-control"  style="font-size: 20px;" value="{{exps.Datef}}">
+            </div>
+            <div class="form-group">
+              <label for="message-text" class="control-label" style="font-size: 12px;">About:</label>
+              <textarea #about class="form-control"  rows="5"  style=" resize: none;" >{{exps.about}}</textarea>
+
+            </div>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 22%;" (click)="organisation_child_delete(exps.$key)">Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="O{{exps.$key}}">Fermer</button>
+          <button type="button" class="btn btn-primary"  (click)="organisation_child_update(exps.$key,post.value,org.value,dated.value,datef.value,about.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. experiences child  -->
+
+
+<!-- modale Langue -->
+<div class="modal fade" id="Langued2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 21%;color: cadetblue;">Ajouter une Langue</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+            <div class="form-group">
+              <label for="recipient-name" class="control-label" style="font-size: 12px;">Langue :</label>
+
+
+
+              <select  #lang class="form-control">
+                <option value="">Choisir une Langue</option>
+                <option value="Afrikanns">Afrikanns</option>
+                <option value="Albanian">Albanian</option>
+                <option value="Arabic">Arabic</option>
+                <option value="Armenian">Armenian</option>
+                <option value="Basque">Basque</option>
+                <option value="Bengali">Bengali</option>
+                <option value="Bulgarian">Bulgarian</option>
+                <option value="Catalan">Catalan</option>
+                <option value="Cambodian">Cambodian</option>
+                <option value="Chinese (Mandarin)">Chinese (Mandarin)</option>
+                <option value="Croation">Croation</option>
+                <option value="Czech">Czech</option>
+                <option value="Danish">Danish</option>
+                <option value="Dutch">Dutch</option>
+                <option value="English">English</option>
+                <option value="Estonian">Estonian</option>
+                <option value="Fiji">Fiji</option>
+                <option value="Finnish">Finnish</option>
+                <option value="French">French</option>
+                <option value="Georgian">Georgian</option>
+                <option value="German">German</option>
+                <option value="Greek">Greek</option>
+                <option value="Gujarati">Gujarati</option>
+                <option value="Hebrew">Hebrew</option>
+                <option value="Hindi">Hindi</option>
+                <option value="Hungarian">Hungarian</option>
+                <option value="Icelandic">Icelandic</option>
+                <option value="Indonesian">Indonesian</option>
+                <option value="Irish">Irish</option>
+                <option value="Italian">Italian</option>
+                <option value="Japanese">Japanese</option>
+                <option value="Javanese">Javanese</option>
+                <option value="Korean">Korean</option>
+                <option value="Latin">Latin</option>
+                <option value="Latvian">Latvian</option>
+                <option value="Lithuanian">Lithuanian</option>
+                <option value="Macedonian">Macedonian</option>
+                <option value="Malay">Malay</option>
+                <option value="Malayalam">Malayalam</option>
+                <option value="Maltese">Maltese</option>
+                <option value="Maori">Maori</option>
+                <option value="Marathi">Marathi</option>
+                <option value="Mongolian">Mongolian</option>
+                <option value="Nepali">Nepali</option>
+                <option value="Norwegian">Norwegian</option>
+                <option value="Persian">Persian</option>
+                <option value="Polish">Polish</option>
+                <option value="Portuguese">Portuguese</option>
+                <option value="Punjabi">Punjabi</option>
+                <option value="Quechua">Quechua</option>
+                <option value="Romanian">Romanian</option>
+                <option value="Russian">Russian</option>
+                <option value="Samoan">Samoan</option>
+                <option value="Serbian">Serbian</option>
+                <option value="Slovak">Slovak</option>
+                <option value="Slovenian">Slovenian</option>
+                <option value="Spanish">Spanish</option>
+                <option value="Swahili">Swahili</option>
+                <option value="Swedish ">Swedish </option>
+                <option value="Tamil">Tamil</option>
+                <option value="Tatar">Tatar</option>
+                <option value="Telugu">Telugu</option>
+                <option value="Thai">Thai</option>
+                <option value="Tibetan">Tibetan</option>
+                <option value="Tonga">Tonga</option>
+                <option value="Turkish">Turkish</option>
+                <option value="Ukranian">Ukranian</option>
+                <option value="Urdu">Urdu</option>
+                <option value="Uzbek">Uzbek</option>
+                <option value="Vietnamese">Vietnamese</option>
+                <option value="Welsh">Welsh</option>
+                <option value="Xhosa">Xhosa</option>
+              </select>
+
+            </div>
+
+
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="lfermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 25%;"   (click)="langue_push(lang.value)"  >Enregistrer</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. Langue  -->
+
+
+<!-- modale Langue child -->
+<div *ngFor="let ln of langue | async" >
+  <div class="modal fade" id="{{ln.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 27%;color: cadetblue;">Modifier Langue</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+          <p> Voulez vous supprimer cette langue ??</p>
+
+          </form>
+        </div>
+        <div class="modal-footer">
+
+          <button type="button" class="btn btn-danger btn2"  style="margin-right: 22%;" (click)="langue_child_delete(ln.$key)">Supprimer</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="L{{ln.$key}}">Fermer</button>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. Language child  -->
+
+<!-- modale cover -->
+<div class="modal fade" id="cover" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content-cover">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 24%;color: cadetblue;">Modifier photo de couverture</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+
+
+            <div class="form-group">
+
+              <button type="button" class="btn btn-primary" (click)="get_cover_element('custom-input1')"  style="margin-left: 36%;"  > <i class="fa fa-upload" aria-hidden="true"></i> Upload Cover</button>
+            </div>
+            <div class="form-group">
+              <div class="file-upload">
+
+                <input id="custom-input1" type="file" (change)="fileChangeListener($event)"  style="display:none;">
+              </div>
+              <img-cropper  #cropper [image]="data" [settings]="cropperSettings"></img-cropper>
+
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="covfermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 30.5%;"   (click)="cover_update(data.image)"  >update cover</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. cover  -->
+<!-- modale cover -->
+<div class="modal fade" id="avatar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content-cover">
+      <div *ngFor="let users of user | async">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title"  style="margin-left: 24%;color: cadetblue;">Modifier photo de profil</h4>
+        </div>
+        <div class="modal-body">
+          <form>
+
+
+
+            <div class="form-group">
+
+              <button type="button" class="btn btn-primary" (click)="get_cover_element('custom-input2')"  style="margin-left: 36%;"  > <i class="fa fa-upload" aria-hidden="true"></i> Upload Avatar</button>
+            </div>
+            <div class="form-group">
+              <div class="file-upload" style="margin-left: 90px;">
+
+                <img-cropper  #cropper [image]="data2" [settings]="cropperSettings2" [id]="custom" (onCrop)="cropped($event)"></img-cropper>
+              </div>
+
+
+
+
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal" id="avfermer">Fermer</button>
+          <button type="button" class="btn btn-primary" style="margin-right: 30.5%;"   (click)="avatar_update(data2.image)"  >update photo</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<!--  end .. avatar -->
+
+</div>
+
+
+

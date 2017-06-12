@@ -1,0 +1,114 @@
+@font-face {
+    font-family:'LatoBold';
+
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'LatoHeavy';
+  
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+
+@font-face {
+    font-family:'LatoLight';
+
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'LatoRegular';
+
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'RalewayHeavy';
+
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+000D-FB06;
+}
+@font-face {
+    font-family:'RalewayLight';
+
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'LatoBlack';
+ 
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'Raleway';
+
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'RalewayBold';
+
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'RalewaSemiBoldy';
+
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-00FE;
+}
+@font-face {
+    font-family:'OpenSansSemibold';
+
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FFFD;
+}
+
+@font-face {
+    font-family:'OpenSansBold';
+
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FFFD;
+}
+
+@font-face {
+    font-family:'RalewayThin';
+    ;
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+000D-FB06;
+}
+@font-face {
+    font-family:'RalewayExtraBold';
+
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}

@@ -1,0 +1,49 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 col-xs-12 main">
+      <div class="page-header" style="margin-left: -20%;
+    text-align: -webkit-center;">
+        <img  src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/close-2-icon.png" style="width: 11%; margin-left: -4pc;margin-top: -30px;">
+      </div>
+      <div class="row">
+
+        <div class="col-xs-12 col-md-10 col-md-push-1 col-lg-8 col-lg-push-2 well" style="left: 0.5pc;
+    height: 100%;
+    width: 847px;
+background-color: rgba(29, 113, 168, 0.24);">
+
+          <form #f="ngForm" novalidate (submit)="delete_account(curr.value)">
+            <div class="form-group">
+              <label >Mot de passe actuelle :</label>
+              <input #curr type="password" class="form-control" name="username" [ngModel]="user.username"
+                     required  #username="ngModel">
+              <small [hidden]="username.valid || (username.pristine && !f.submitted)" class="text-danger">
+                Mot de passe requis.
+              </small>
+              <!--<pre *ngIf="username.errors" class="margin-20">{{ username.errors | json }}</pre>-->
+            </div>
+            <div class="form-group">
+              <label ></label>
+              <div class="row">
+                <div class="col-md-1"> <input #npass type="checkbox"  style="    width: 22px; height: 18px;" name="password" [ngModel]="user.password"
+                                              required validateEqual="confirmPassword" reverse="true" #password="ngModel"></div>
+                <div class="col-md-10"> <label style="margin-left: -47px;margin-top: 2px;">Je suis le responsable de la suppression de toutes mes données personnelles</label></div>
+              </div>
+
+              <small [hidden]="password.valid || (password.pristine && !f.submitted)" class="text-danger">
+                Case à cocher requise.
+              </small>
+              <!--<pre *ngIf="password.errors" class="margin-20">{{ password.errors | json }}</pre>-->
+            </div>
+            <button type="submit" [disabled]="!f.valid" class="btn btn-primary" style="margin-top: 2%;">Disable</button>
+            <div *ngIf="error" class="alert alert-danger" role="alert" style="margin-top: 15px;">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span>
+              {{error}}
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

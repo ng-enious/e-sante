@@ -1,0 +1,279 @@
+<link href="https://unpkg.com/@angular/material/prebuilt-themes/indigo-pink.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/components/modal.css" rel="stylesheet">
+<div style="margin-bottom: 12px;"> </div>
+<md-tab-group >
+  <md-tab >
+    <ng-template md-tab-label>
+      <i class="fa fa-search" aria-hidden="true"></i><span> Rechercher Document</span>
+    </ng-template>
+
+    <div class="listpgWraper">
+      <div class="container">
+
+        <!-- Page Title start -->
+        <div class="pageSearch">
+          <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-9">
+              <div class="searchform">
+                <div class="row">
+                  <div class="col-md-4 col-sm-3">
+                    <input type="text" class="form-control" #search  [(ngModel)]="keyword" placeholder="Comment puis-je vous aider aujourd'hui ?" style="    margin-left: -60%;    width: 877px;" />
+                  </div>
+
+                  <div class="col-md-1 col-sm-2">
+                    <button class="btn" style="margin-left: 594%;" [routerLink]="['/docsearch', keyword]"><i class="fa fa-search" aria-hidden="true"></i></button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+              <div *ngIf="loader" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let docc of docs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img src="https://lh3.googleusercontent.com/8VF8Oom0BIT89x24dFfhjexnQ2EQy_vNx5Qxob9rWxzPDyuc55IzB5POJ1Vcm2Xve4o2=w300" alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{docc.titre|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_name(docc.uid) | async)?.name }} | Publier le {{ docc.date*-1 | date:"dd/MM/yy hh:mm a" }}</a></div>
+                      <div class="companyName"><a>{{docc.tags}}</a></div>
+                      <div class="companyName"><p></p></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a target="_blank" href="{{docc.doc}}">ouvrir</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{docc.desc | truncate :'500' }}</p>
+              </li>
+              <!-- job end -->
+
+              <!-- job start -->
+
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Footer end-->
+
+    <!--Copyright-->
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>
+
+  </md-tab>
+  <md-tab >
+    <ng-template md-tab-label>
+    <i class="fa fa-upload" aria-hidden="true"></i><span> Déposer Document</span>
+  </ng-template>
+<md-card>
+    <md-input-container style="margin-left: 30%;" >
+      <input mdInput #titre placeholder="Titre" value="" size="63">
+
+    </md-input-container>
+<br>
+  <md-input-container style="margin-left:30%;" class="demo-full-width">
+    <textarea mdInput #desc placeholder="Déscription" id="descc" rows="7" cols="63" style=" resize: none;"></textarea>
+  </md-input-container>
+<br>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4" style="margin-left: -4%;width: 489px;"><tag-input [(ngModel)]='items' secondaryPlaceholder="Tags" style="margin-left: 30%;width: 35%;margin-bottom: 2pc;"></tag-input></div>
+    <div class="col-md-4"></div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4"></div>
+
+  <div class="col-md-3" style=" margin-left: 2%;">
+    <span>{{getfilename(fich)}} <i  *ngIf="fich.value!=''" class="close" style="font-style: inherit;font-size: 21px;float: none;cursor: pointer" (click)="videfile()">x</i></span>
+    <a (click)="getfile()" style="margin-top: 10%;background: #3f51b5;
+    color: #fff;
+    padding: 13px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 0;
+    display: block;
+    cursor: pointer;"><i style="margin-left: 48px;" class="fa fa-file-text" aria-hidden="true"></i> Choisir un Fichier</a>
+  </div>
+    <input type="file" #fich accept="application/pdf" style="display: none" (change)="handleFileTarget($event)" id="fich"/>
+  </div>
+  <div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-3" style=" margin-left: 6%;
+    width: 16%; cursor: pointer"> <a (click)="upload_file(titre.value,desc.value,fich.value)" style="margin-top: 20%;background: #00a2ff;
+    color: #fff;
+    padding: 13px 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 0;
+    display: block;"><span style="margin-left: -9%;"><i class="fa fa-upload" style="margin-left: 48px;"  aria-hidden="true"></i> Publier</span></a>
+    </div>
+  </div>
+<br>
+  <md-progress-bar *ngIf="bufferValuee[0]!=0"
+    class="example-margin"
+    #load
+    [color]="primary"
+    [mode]="buffer"
+    [value]="loadd[0]"
+    [bufferValue]="bufferValuee[0]">
+  </md-progress-bar>
+
+</md-card>
+  </md-tab>
+
+
+  <md-tab >
+
+    <ng-template md-tab-label >
+     <div id="my"> <i class="fa fa-file-pdf-o" aria-hidden="true"></i><span> Mes Document</span></div>
+    </ng-template>
+    <div class="listpgWraper">
+      <div class="container">
+
+
+        <!-- Page Title end -->
+
+        <!-- Search Result and sidebar start -->
+        <div class="row">
+          <div class="col-md-3 col-sm-6">
+            <!-- Side Bar start -->
+
+            <!-- Side Bar end -->
+          </div>
+          <div class="col-md-3 col-sm-6 pull-right">
+            <!-- Social Icons -->
+
+
+            <!-- Sponsord By -->
+
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <!-- Search List -->
+            <ul class="searchList">
+              <!-- job start -->
+              <div *ngIf="loader2" class="loader" id="loader-1" style="margin-top: 17%"></div>
+              <div *ngIf="x[0]==0" style="margin-bottom: 55%;"> <h2 style="color: #27aae1;font-weight: 400;margin-top: 7%;margin-left: -9%;width: 110%;">Vous n'avez aucun document pour le moment</h2></div>
+              <li style="    width: 880px;  margin-left: -30%;"  *ngFor="let mdoc of mydocs | async">
+                <div class="row">
+                  <div class="col-md-8 col-sm-8">
+                    <div class="jobimg"><img src="https://lh3.googleusercontent.com/8VF8Oom0BIT89x24dFfhjexnQ2EQy_vNx5Qxob9rWxzPDyuc55IzB5POJ1Vcm2Xve4o2=w300" alt="Job Name" /></div>
+                    <div class="jobinfo">
+                      <h3><a>{{mdoc.titre|titlecase}}</a></h3>
+                      <div class="companyName"><a style="color: #c5084c;font-size: 14px;">{{ (get_name2(mdoc.uid) | async)?.name | titlecase }}</a> | Publier le {{ mdoc.date*-1 | date:"dd/MM/yy hh:mm a" }}</div>
+                      <div class="companyName"><a>{{mdoc.tags}}</a></div>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                  <div class="col-md-4 col-sm-4">
+                    <div style="margin-top: 14px;" class="listbtn"><a target="_blank" href="{{mdoc.doc}}">ouvrir</a></div>
+                    <div style="margin-top: 14px;" class="listbtn"><a style="background: #d06029; cursor:pointer;" data-toggle="modal" [attr.data-target]="'#'+mdoc.$key" (click)="try(mdoc.tags,mdoc.$key)">Modifier</a></div>
+                  </div>
+                </div>
+                <p style="margin-left: 9px;">{{mdoc.desc | truncate :'500'}}</p>
+              </li>
+              <!-- job end -->
+
+              <!-- job start -->
+
+            </ul>
+
+
+            <!-- Pagination end -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--Footer end-->
+    <div class="copyright">
+      <div class="container">
+        <div class="bttxt">Copyright &copy; 2017</div>
+      </div>
+    </div>
+    <!--Copyright-->
+
+
+
+  </md-tab>
+</md-tab-group>
+
+<!--modal start-->
+<div *ngFor="let doc of docs | async">
+<div class="modal fade" id="{{doc.$key}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title"  style="margin-left: 33%;color: cadetblue;">Modifier Document</h4>
+      </div>
+      <div class="modal-body">
+
+
+          <div class="form-group">
+
+            <md-input-container style="width: 567px;">
+              <input mdInput #titre2 placeholder="Titre" value="{{doc.titre}}" id="B{{doc.$key}}" size="63">
+
+            </md-input-container>
+          </div>
+          <div class="form-group">
+
+            <md-input-container style="width: 567px;" class="demo-full-width">
+              <textarea mdInput #desc2 placeholder="Déscription" rows="7" cols="63" maxlength="525" style=" resize: none;">{{doc.desc}}</textarea>
+            </md-input-container>
+          </div>
+          <!--<div class="form-group">-->
+            <!--<label  class="control-label" style="font-size: 12px;" >Tags:</label>-->
+           <!---->
+          <!--</div>-->
+          <tag-input [(ngModel)]="items2"  secondaryPlaceholder="Tags"  name="s{{doc.$key}}"></tag-input>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger btn2"  style="margin-right: 50%;" (click)="delete_doc(doc.$key,doc.refdata)" >Supprimer</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="fe{{doc.$key}}">Fermer</button>
+        <button type="button" class="btn btn-primary"  (click)="update(titre2.value,desc2.value,doc.$key)" >Enregistrer</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>

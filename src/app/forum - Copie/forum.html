@@ -1,0 +1,116 @@
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,500,700,900" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div class="forum">
+  <div id="wrapper">
+
+
+    <header class="header">
+      <div class="container-fluid">
+
+      </div><!-- end container -->
+    </header><!-- end header -->
+
+
+    <section class="section lb">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="widget nopadding clearfix">
+              <div class="panel panel-primary nopadding">
+                <div class="panel-heading">
+                  <h3 class="panel-title">Rechercher des sujets d'aide populaires</h3>
+                </div>
+                <div class="panel-body">
+                  <form class="site-search">
+                    <div class="form-group label-floating">
+                      <label class="control-label" for="focusedInput2">Comment puis-je vous aider aujourd'hui ?</label>
+                      <input class="form-control" #search  (keyup)="0"  id="focusedInput2" type="text">
+                    </div>
+
+                  </form><!-- end well -->
+                </div>
+              </div>
+            </div><!-- end widget -->
+
+
+     <!--<li *ngFor="let destination of destinations | searchFilter: search.value" class="destination">-->
+              <!--<div class="box destination-wrapper">-->
+                <!--<span class="flag" >{{destination.key}}</span>-->
+                <!--<span><strong>{{destination.uid}}</strong> </span>-->
+                <!--<span>{{destination.title}} for <span class="currency">$</span><span class="price">{{destination.key}}</span></span>-->
+              <!--</div>-->
+            <!--</li>-->
+
+
+            <div class="home-tab clearfix">
+              <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+
+                <!-- second one-->
+                <div class="home-tab clearfix">
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a href="#knowledge_tab">Résultat de la recherche</a></li>
+
+                  </ul>
+
+                  <div class="tab-content">
+                    <div id="knowledge_tab" class="tab-pane fade in active">
+                      <aside class="topic-list">
+                        <div *ngIf="loader" >
+                          <br>
+                          <div  class="loader" id="loader-1"></div>
+                        </div>
+                        <div class="panel panel-default" *ngFor="let pos of destinations | searchFilter: search.value">
+                          <article class="well btn-group-sm clearfix">
+                            <div class="panel-heading" role="tab" id="headingTwo">
+                              <div class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#{{pos.key}}" aria-expanded="false" aria-controls="collapseTwo">
+                                  <header class="topic-title clearfix">
+                                    <h3>{{pos.title}}</h3>
+                                    <small>{{ (get_name(pos.uid) | async)?.name | titlecase }}</small>
+                                    <small>{{ pos.date*-1 | date:"dd/MM/yy hh:mm a" }}</small>
+                                  </header>
+                                </a>
+                              </div>
+                            </div>
+                            <div id="{{pos.key}}" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                              <div class="panel-body">
+
+
+                                <div class="topic-desc row-fluid clearfix">
+                                  <div class="col-sm-2">
+                                    <img src="{{ (get_name(pos.uid) | async)?.avatar }}" alt="" class="avatar img-circle img-responsive">
+                                  </div>
+                                  <div class="col-sm-10">
+                                    <h4>{{ (get_name(pos.uid) | async)?.name | titlecase }}</h4>
+                                    <small>{{ (get_name(pos.uid) | async)?.poste | titlecase }}</small>
+                                    <p> {{pos.desc | titlecase}}</p>
+                                    <a [routerLink]="['/forum',pos.key]" class="readmore" title="">Continue reading →</a>
+                                  </div>
+                                </div><!-- end tpic-desc -->
+
+
+                              </div><!-- end panel-body -->
+                            </div><!-- end panel-collapse -->
+                          </article><!-- end article well -->
+                        </div><!-- end panel -->
+                      </aside>
+                    </div><!-- end panel-group -->
+
+
+
+                  </div><!-- end tab pane -->
+
+
+                </div><!-- end tab-content -->
+              </div><!-- end home-tab -->
+            </div><!-- end col -->
+
+          </div><!-- end row -->
+        </div>
+      </div><!-- end container -->
+    </section><!-- end section -->
+  </div>
+</div>
+<!-- end wrapper -->

@@ -1,0 +1,171 @@
+@font-face {
+    font-family:'LatoBold';
+    src: url('Lato%20Bold.html');
+	src: url('../fonts/Lato%20Boldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Lato%20Bold.woff2') format('woff2'),
+		url('../fonts/Lato%20Bold.woff') format('woff'),
+		url('../fonts/Lato%20Bold.svg#Lato Bold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'LatoHeavy';
+    src: url('../fonts/Lato%20Heavy.eot');
+	src: url('../fonts/Lato%20Heavyd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Lato%20Heavy.woff2') format('woff2'),
+		url('../fonts/Lato%20Heavy.woff') format('woff'),
+		url('../fonts/Lato%20Heavy.svg#LatoHeavy') format('svg');
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+
+@font-face {
+    font-family:'LatoLight';
+    src: url('../fonts/Lato%20Light.eot');
+	src: url('../fonts/Lato%20Lightd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Lato%20Light.woff2') format('woff2'),
+		url('../fonts/Lato%20Light.woff') format('woff'),
+		url('../fonts/Lato%20Light.svg#LatoLight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'LatoRegular';
+    src: url('../fonts/Lato%20Regular.eot');
+	src: url('../fonts/Lato%20Regulard41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Lato%20Regular.woff2') format('woff2'),
+		url('../fonts/Lato%20Regular.woff') format('woff'),
+		url('../fonts/Lato%20Regular.svg#LatoRegular') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'RalewayHeavy';
+    src: url('../fonts/Raleway%20Heavy.eot');
+	src: url('../fonts/Raleway%20Heavyd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20Heavy.woff2') format('woff2'),
+		url('../fonts/Raleway%20Heavy.woff') format('woff'),
+		url('../fonts/Raleway%20Heavy.svg#RalewayHeavy') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+000D-FB06;
+}
+@font-face {
+    font-family:'RalewayLight';
+    src: url('../fonts/Raleway%20Light.eot');
+	src: url('../fonts/Raleway%20Lightd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20Light.woff2') format('woff2'),
+		url('../fonts/Raleway%20Light.woff') format('woff'),
+		url('../fonts/Raleway%20Light.svg#RalewayLight') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'LatoBlack';
+    src: url('../fonts/Lato%20Black.eot');
+	src: url('../fonts/Lato%20Blackd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Lato%20Black.woff2') format('woff2'),
+		url('../fonts/Lato%20Black.woff') format('woff'),
+		url('../fonts/Lato%20Black.svg#LatoBlack') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FEFF;
+}
+@font-face {
+    font-family:'Raleway';
+    src: url('../fonts/Raleway.eot');
+	src: url('../fonts/Ralewayd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway.woff2') format('woff2'),
+		url('../fonts/Raleway.woff') format('woff'),
+		url('../fonts/Raleway.svg#Raleway') format('svg');
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'RalewayBold';
+    src: url('Raleway%20Bold.html');
+	src: url('../fonts/Raleway%20Boldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20Bold.woff2') format('woff2'),
+		url('../fonts/Raleway%20Bold.woff') format('woff'),
+		url('../fonts/Raleway%20Bold.svg#RalewayBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}
+@font-face {
+    font-family:'RalewaSemiBoldy';
+    src: url('../fonts/Raleway%20SemiBold.eot');
+	src: url('../fonts/Raleway%20SemiBoldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20SemiBold.woff2') format('woff2'),
+		url('../fonts/Raleway%20SemiBold.woff') format('woff'),
+		url('../fonts/Raleway%20SemiBold.svg#Raleway SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-00FE;
+}
+@font-face {
+    font-family:'OpenSansSemibold';
+    src: url('../fonts/Open%20Sans%20Semibold.eot');
+	src: url('../fonts/Open%20Sans%20Semiboldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Open%20Sans%20Semibold.woff2') format('woff2'),
+		url('../fonts/Open%20Sans%20Semibold.woff') format('woff'),
+		url('../fonts/Open%20Sans%20Semibold.svg#OpenSansSemibold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FFFD;
+}
+
+@font-face {
+    font-family:'OpenSansBold';
+    src: url('../fonts/Open%20Sans%20Bold.eot');
+	src: url('../fonts/Open%20Sans%20Boldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Open%20Sans%20Bold.woff2') format('woff2'),
+		url('../fonts/Open%20Sans%20Bold.woff') format('woff'),
+		url('../fonts/Open%20Sans%20Bold.svg#OpenSansBold') format('svg');
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FFFD;
+}
+
+@font-face {
+    font-family:'RalewayThin';
+    src: url('../fonts/Raleway%20Thin.eot');
+	src: url('../fonts/Raleway%20Thind41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20Thin.woff2') format('woff2'),
+		url('../fonts/Raleway%20Thin.woff') format('woff'),
+		url('../fonts/Raleway%20Thin.svg#RalewayThin') format('svg');
+    font-weight: 100;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+000D-FB06;
+}
+@font-face {
+    font-family:'RalewayExtraBold';
+    src: url('../fonts/Raleway%20ExtraBold.eot');
+	src: url('../fonts/Raleway%20ExtraBoldd41d.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/Raleway%20ExtraBold.woff2') format('woff2'),
+		url('../fonts/Raleway%20ExtraBold.woff') format('woff'),
+		url('../fonts/Raleway%20ExtraBold.svg#RalewayExtraBold') format('svg');
+    font-weight: 800;
+    font-style: normal;
+    font-stretch: normal;
+    unicode-range: U+0020-FB06;
+}

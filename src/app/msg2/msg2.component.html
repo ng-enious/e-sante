@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<div class="right" >
+  <div *ngIf="y[0]!=currentuser" class="top"><span>To: <span class="name">{{x[0] | titlecase}}</span></span></div>
+  <div *ngIf="y[1]!=currentuser" class="top"><span>To: <span class="name">{{x[2] | titlecase}}</span></span></div>
+  <div #scrollMe class="chat" data-chat="person2"  class="active-chat" style=" overflow-y: scroll;
+    overflow-x: hidden;
+    height: 83%;
+    width: 100%;
+    margin-top: 7px;
+ ">
+    <!--<div class="conversation-start">-->
+      <!--<span>Today, 5:38 PM </span>-->
+    <!--</div>-->
+    <div  #scrollMe *ngFor="let mm of msg | async">
+    <div  #scrollMe *ngIf="mm.sid!=currentuser" class="bubble you" data-toggle="tooltip" data-placement="right"
+          title='{{ mm.date | date:"dd/MM/yy hh:mm a" }}'>
+      {{mm.content}}
+      <br>
+      <img src="{{mm.img}}">
+
+    </div>
+    <div   #scrollMe *ngIf="mm.sid==currentuser" class="bubble me" data-toggle="tooltip" data-placement="left" title='{{ mm.date | date:"dd/MM/yy hh:mm a" }}'>
+      {{mm.content}}
+      <br>
+      <img src="{{mm.img}}">
+
+    </div>
+    </div>
+
+  </div>
+  <div class="write">
+    <a (click)="upload_img()" class="write-link attach" style="cursor: pointer"></a>
+    <a  *ngIf="hgg.value!=''" class="write-link smiley" style="font-style: inherit;font-size: 21px;float: none;cursor: pointer" (click)="videfile()"></a>
+    <input type="text"  placeholder="Type your message" (keyup.enter)="sendMessage($event.target.value,hgg.value)" [(ngModel)]="msgVal" />
+      <input #hgg type="file" style="visibility:hidden;width: 0%" (change)="handleFileTarget($event)">
+
+  </div>
+
+</div>
